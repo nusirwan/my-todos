@@ -1,10 +1,22 @@
 import styled, { css } from 'styled-components';
+import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
 
 const { colors } = theme;
 
-export const List = styled.li`
+const ListProps = posed.li( {
+	exit: {
+		opacity: 0,
+		y: -20,
+	},
+	enter: {
+	  opacity: 1,
+	  y: 0,
+	},
+} );
+
+export const List = styled( ListProps )`
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -15,6 +27,21 @@ export const List = styled.li`
 	background-color: ${ colors.white };
 	border-radius: 0.25rem;
 	list-style:none;
+`;
+
+export const Task = styled.span`
+	flex-grow: 1;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-right: 2em;
+	font-size: 1rem;
+	text-decoration: none;
+	color: ${ colors.sanJuan };
+
+	${ props => props.completed && css`
+		text-decoration: line-through;
+		color: ${ colors.silverChalice };
+	`}
 `;
 
 export const Form = styled.form`
@@ -34,21 +61,6 @@ export const Input = styled.input`
 		border: none;
 		outline: none;
 	}
-`;
-
-export const Task = styled.span`
-	flex-grow: 1;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	padding-right: 2em;
-	font-size: 1rem;
-	text-decoration: none;
-	color: ${ colors.sanJuan };
-
-	${ props => props.completed && css`
-		text-decoration: line-through;
-		color: ${ colors.silverChalice };
-	`}
 `;
 
 const BaseButton = styled.button`
