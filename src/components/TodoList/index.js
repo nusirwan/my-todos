@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Todo from '../Todo';
+
 import { Todos, Wraper } from './styles';
 
 const initTodos = [
@@ -27,13 +29,12 @@ class TodoList extends Component {
 			<Wraper>
 				<Todos>
 					{ todos.map( todo => (
-						<li
+						<Todo
 							key={ todo.id }
 							id={ todo.id }
 							task={ todo.task }
-						>
-							{ todo.task }
-						</li>
+							completed={ todo.completed }
+						/>
 					) ) }
 				</Todos>
 			</Wraper>
