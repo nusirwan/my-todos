@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	FiCheckSquare,
 	FiSquare,
@@ -8,7 +8,8 @@ import {
 import { List, Task, Remove, Check } from './styles';
 
 const Todo = props => {
-	const { completed, task, handleRemove, id, handleCompletion } = props;
+	const [ task ] = useState( props.task );
+	const { completed, handleRemove, id, handleCompletion } = props;
 
 	return (
 		<List>
