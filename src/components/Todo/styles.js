@@ -56,3 +56,11 @@ export const Remove = styled( BaseButton )`
 		color: ${ colors.carnation };
 	}
 `;
+
+export const Check = styled( BaseButton )`
+	svg {
+		width: 1.25rem;
+		height: 1.25rem;
+		color: ${ colors.turquoiseBlue };
+	}
+`;

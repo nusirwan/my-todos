@@ -1,7 +1,11 @@
 import React from 'react';
-import { FiX } from 'react-icons/fi';
+import {
+	FiCheckSquare,
+	FiSquare,
+	FiX,
+} from 'react-icons/fi';
 
-import { List, Task, Remove } from './styles';
+import { List, Task, Remove, Check } from './styles';
 
 const Todo = props => {
 	const { completed, task, handleRemove, id } = props;
@@ -11,6 +15,9 @@ const Todo = props => {
 			<Task completed={ completed }>
 				{ task }
 			</Task>
+			<Check completed={ completed }>
+				{ completed ? <FiCheckSquare /> : <FiSquare /> }
+			</Check>
 			<Remove onClick={ () => handleRemove( id ) }>
 				<FiX />
 			</Remove>
