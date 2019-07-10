@@ -15,23 +15,40 @@ import {
 } from './styles';
 
 const Todo = props => {
-	const [ task ] = useState( props.task );
+	const [ task, setTask ] = useState( props.task );
 	const [ editing, setEditing ] = useState( false );
-	const { completed, handleRemove, id, handleCompletion } = props;
+	const {
+		completed,
+		handleCompletion,
+		handleRemove,
+		id,
+		updateTodo,
+	} = props;
 
 	const handleEdit = () => {
 		setEditing( ! editing );
+	};
+
+	const handleUpdate = event => {
+		event.preventDefault();
+		updateTodo(
+			id,
+			task,
+		)
+		setEditing( false );
 	};
 
 	return (
 		<List>
 			{ editing
 				? (
-					<Form>
+					<Form onSubmit={ handleUpdate }>
 						<Input
 							autoComplete="off"
 							autoFocus={ true }
 							name='task'
+							onChange={ event => setTask( event.target.value ) }
+							onBlur={ handleUpdate }
 							type="text"
 							value={ task }
 						/>
