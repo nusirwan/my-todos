@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v4';
 
+import Navigation from '../Navigation';
 import Todo from '../Todo';
 
 import { Todos, Wraper } from './styles';
@@ -22,11 +24,26 @@ class TodoList extends Component {
 		todos: initTodos,
 	};
 
+	add = newTodos => {
+		this.setState( {
+			todos: [
+				...this.state.todos,
+				{
+					id: uuid(),
+					task: newTodos,
+					completed: false,
+				},
+			],
+		} )
+	}
+
 	render() {
+		const { add } = this;
 		const { todos } = this.state;
 
 		return (
 			<Wraper>
+				<Navigation addTodo={ add } />
 				<Todos>
 					{ todos.map( todo => (
 						<Todo
