@@ -22,6 +22,7 @@ const initTodos = [
 class TodoList extends Component {
 	state = {
 		todos: initTodos,
+		todoToShow: 'all',
 	};
 
 	add = newTodos => {
@@ -37,13 +38,31 @@ class TodoList extends Component {
 		} )
 	}
 
+	updateTodoToShow = filter => {
+		this.setState( {
+			todoToShow: filter,
+		} )
+	}
+
 	render() {
-		const { add } = this;
-		const { todos } = this.state;
+		const { add, updateTodoToShow } = this;
+		const { todoToShow } = this.state;
+
+		let todos = [];
+		if ( todoToShow === 'all' ) {
+			todos = this.state.todos;
+		} else if ( todoToShow === 'active' ) {
+			todos = this.state.todos.filter( todo => ! todo.completed );
+		} else if ( todoToShow === 'complete' ) {
+			todos = this.state.todos.filter( todo => todo.completed );
+		}
 
 		return (
 			<Wraper>
-				<Navigation addTodo={ add } />
+				<Navigation
+					addTodo={ add }
+					filterTodo={ updateTodoToShow }
+				/>
 				<Todos>
 					{ todos.map( todo => (
 						<Todo
