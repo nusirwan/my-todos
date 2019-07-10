@@ -16,22 +16,33 @@ import {
 
 const Todo = props => {
 	const [ task ] = useState( props.task );
+	const [ editing, setEditing ] = useState( false );
 	const { completed, handleRemove, id, handleCompletion } = props;
+
+	const handleEdit = () => {
+		setEditing( ! editing );
+	};
 
 	return (
 		<List>
-			<Form>
-				<Input
-					autoComplete="off"
-					autoFocus={ true }
-					name='task'
-					type="text"
-					value={ task }
-				/>
-			</Form>
-			<Task completed={ completed }>
-				{ task }
-			</Task>
+			{ editing
+				? (
+					<Form>
+						<Input
+							autoComplete="off"
+							autoFocus={ true }
+							name='task'
+							type="text"
+							value={ task }
+						/>
+					</Form>
+				)
+				: (
+					<Task completed={ completed } onDoubleClick={ handleEdit }>
+						{ task }
+					</Task>
+				)
+			}
 			<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
 				{ completed ? <FiCheckSquare /> : <FiSquare /> }
 			</Check>
