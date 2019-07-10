@@ -4,14 +4,14 @@ import { FiX } from 'react-icons/fi';
 import { List, Task, Remove } from './styles';
 
 const Todo = props => {
-	const { completed, task } = props;
+	const { completed, task, handleRemove, id } = props;
 
 	return (
 		<List>
 			<Task completed={ completed }>
 				{ task }
 			</Task>
-			<Remove>
+			<Remove onClick={ () => handleRemove( id ) }>
 				<FiX />
 			</Remove>
 		</List>

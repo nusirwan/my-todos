@@ -38,6 +38,14 @@ class TodoList extends Component {
 		} )
 	}
 
+	remove = id => {
+		this.setState( {
+			todos: this.state.todos.filter( todo =>
+				todo.id !== id
+			),
+		} )
+	}
+
 	updateTodoToShow = filter => {
 		this.setState( {
 			todoToShow: filter,
@@ -45,7 +53,7 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { add, updateTodoToShow } = this;
+		const { add, updateTodoToShow, remove } = this;
 		const { todoToShow } = this.state;
 
 		let todos = [];
@@ -70,6 +78,7 @@ class TodoList extends Component {
 							id={ todo.id }
 							task={ todo.task }
 							completed={ todo.completed }
+							handleRemove={ remove }
 						/>
 					) ) }
 				</Todos>
