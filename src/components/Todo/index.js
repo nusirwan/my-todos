@@ -8,14 +8,14 @@ import {
 import { List, Task, Remove, Check } from './styles';
 
 const Todo = props => {
-	const { completed, task, handleRemove, id } = props;
+	const { completed, task, handleRemove, id, handleCompletion } = props;
 
 	return (
 		<List>
 			<Task completed={ completed }>
 				{ task }
 			</Task>
-			<Check completed={ completed }>
+			<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
 				{ completed ? <FiCheckSquare /> : <FiSquare /> }
 			</Check>
 			<Remove onClick={ () => handleRemove( id ) }>
