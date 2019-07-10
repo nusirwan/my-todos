@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v4';
 
+import Navigation from '../Navigation';
 import Todo from '../Todo';
 
 import { Todos, Wraper } from './styles';
@@ -20,13 +22,47 @@ const initTodos = [
 class TodoList extends Component {
 	state = {
 		todos: initTodos,
+		todoToShow: 'all',
 	};
 
+	add = newTodos => {
+		this.setState( {
+			todos: [
+				...this.state.todos,
+				{
+					id: uuid(),
+					task: newTodos,
+					completed: false,
+				},
+			],
+		} )
+	}
+
+	updateTodoToShow = filter => {
+		this.setState( {
+			todoToShow: filter,
+		} )
+	}
+
 	render() {
-		const { todos } = this.state;
+		const { add, updateTodoToShow } = this;
+		const { todoToShow } = this.state;
+
+		let todos = [];
+		if ( todoToShow === 'all' ) {
+			todos = this.state.todos;
+		} else if ( todoToShow === 'active' ) {
+			todos = this.state.todos.filter( todo => ! todo.completed );
+		} else if ( todoToShow === 'complete' ) {
+			todos = this.state.todos.filter( todo => todo.completed );
+		}
 
 		return (
 			<Wraper>
+				<Navigation
+					addTodo={ add }
+					filterTodo={ updateTodoToShow }
+				/>
 				<Todos>
 					{ todos.map( todo => (
 						<Todo
