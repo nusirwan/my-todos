@@ -8,12 +8,12 @@ import { Todos, Wraper } from './styles';
 
 const initTodos = [
 	{
-		id: 0,
+		id: uuid(),
 		task: 'Buy running shoes',
 		completed: false,
 	},
 	{
-		id: 1,
+		id: uuid(),
 		task: 'Run two miles with Lisa',
 		completed: true,
 	},
