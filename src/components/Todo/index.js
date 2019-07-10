@@ -1,6 +1,7 @@
 import React from 'react';
+import { FiX } from 'react-icons/fi';
 
-import { List, Task } from './styles';
+import { List, Task, Remove } from './styles';
 
 const Todo = props => {
 	const { completed, task } = props;
@@ -10,6 +11,9 @@ const Todo = props => {
 			<Task completed={ completed }>
 				{ task }
 			</Task>
+			<Remove>
+				<FiX />
+			</Remove>
 		</List>
 	)
 }

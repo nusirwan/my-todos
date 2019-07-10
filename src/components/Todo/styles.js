@@ -31,3 +31,28 @@ export const Task = styled.span`
 		color: ${ colors.silverChalice };
 	`}
 `;
+
+const BaseButton = styled.button`
+	display: flex;
+	align-items: center;
+	margin-right: 0.375em;
+	padding-left: 0.125em;
+	padding-top: 1.125em;
+	padding-right: 0.125em;
+	padding-bottom: 1.125em;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+
+	&:focus {
+		outline: none;
+	}
+`;
+
+export const Remove = styled( BaseButton )`
+	svg {
+		width: 1.375rem;
+		height: 1.375rem;
+		color: ${ colors.carnation };
+	}
+`;
