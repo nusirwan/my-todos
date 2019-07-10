@@ -8,12 +8,12 @@ import { Todos, Wraper } from './styles';
 
 const initTodos = [
 	{
-		id: 0,
+		id: uuid(),
 		task: 'Buy running shoes',
 		completed: false,
 	},
 	{
-		id: 1,
+		id: uuid(),
 		task: 'Run two miles with Lisa',
 		completed: true,
 	},
@@ -38,6 +38,40 @@ class TodoList extends Component {
 		} )
 	}
 
+	remove = id => {
+		this.setState( {
+			todos: this.state.todos.filter( todo =>
+				todo.id !== id
+			),
+		} )
+	}
+
+	update = ( id, updatedTask ) => {
+		const updatedTodos = this.state.todos.map( todo => {
+			if ( todo.id === id ) {
+				return {
+					...todo,
+					task: updatedTask,
+				}
+			}
+			return todo;
+		} );
+		this.setState( { todos: updatedTodos } );
+	}
+
+	toggleCompletion = id => {
+		const updatedTodos = this.state.todos.map( todo => {
+			if ( todo.id === id ) {
+				return {
+					...todo,
+					completed: ! todo.completed,
+				}
+			}
+			return todo
+		} );
+		this.setState( { todos: updatedTodos } );
+	}
+
 	updateTodoToShow = filter => {
 		this.setState( {
 			todoToShow: filter,
@@ -45,7 +79,7 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { add, updateTodoToShow } = this;
+		const { add, updateTodoToShow, remove, toggleCompletion, update } = this;
 		const { todoToShow } = this.state;
 
 		let todos = [];
@@ -70,6 +104,9 @@ class TodoList extends Component {
 							id={ todo.id }
 							task={ todo.task }
 							completed={ todo.completed }
+							handleRemove={ remove }
+							handleCompletion={ toggleCompletion }
+							updateTodo={ update }
 						/>
 					) ) }
 				</Todos>
