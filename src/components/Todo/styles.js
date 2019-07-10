@@ -17,6 +17,25 @@ export const List = styled.li`
 	list-style:none;
 `;
 
+export const Form = styled.form`
+	flex-grow: 1;
+`;
+
+export const Input = styled.input`
+	width: 90%;
+	margin-top: 0.9375em;
+	margin-bottom: 0.9375em;
+	border: none;
+	font-size: 1rem;
+	font-family: 'Quicksand', sans-serif;
+	color: ${ colors.sanJuan };
+
+	&:focus {
+		border: none;
+		outline: none;
+	}
+`;
+
 export const Task = styled.span`
 	flex-grow: 1;
 	margin-top: 1em;

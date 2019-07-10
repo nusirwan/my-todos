@@ -5,7 +5,14 @@ import {
 	FiX,
 } from 'react-icons/fi';
 
-import { List, Task, Remove, Check } from './styles';
+import {
+	Check,
+	Input,
+	Form,
+	List,
+	Remove,
+	Task,
+} from './styles';
 
 const Todo = props => {
 	const [ task ] = useState( props.task );
@@ -13,6 +20,15 @@ const Todo = props => {
 
 	return (
 		<List>
+			<Form>
+				<Input
+					autoComplete="off"
+					autoFocus={ true }
+					name='task'
+					type="text"
+					value={ task }
+				/>
+			</Form>
 			<Task completed={ completed }>
 				{ task }
 			</Task>
