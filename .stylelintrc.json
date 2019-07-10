@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components"
+  ],
+  "processors": [
+    "stylelint-processor-styled-components"
+  ],
+  "rules": {
+		"at-rule-empty-line-before" : [ "always", {
+      "except": [ "blockless-after-blockless", "first-nested" ],
+      "ignore": [ "after-comment" ]
+    } ],
+    "function-parentheses-space-inside": "always-single-line",
+    "selector-type-no-unknown": [ true, {
+      "ignoreTypes": [
+        "/^\\^/"
+      ]
+    } ],
+		"rule-empty-line-before" : [ "always", {
+      "except": [ "first-nested" ],
+      "ignore": [ "after-comment" ]
+    } ]
+  }
+}
