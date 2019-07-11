@@ -90,6 +90,26 @@ export const More = styled( BaseButton )`
 		height: 1.25rem;
 		color: ${ colors.silverChalice };
 	}
+
+	${ props => props.isVisible && css`
+		visibility: hidden;
+		opacity: 0;
+	`}
+`;
+
+export const ToggleWrap = styled.div`
+	display: flex;
+	position: absolute;
+	right: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.1s, opacity 0.5s, transform 0.3s;
+
+	${ props => props.isVisible && css`
+		visibility: visible;
+		opacity: 1;
+		transform: translate( -5px, 0 );
+	`}
 `;
 
 export const Remove = styled( BaseButton )`

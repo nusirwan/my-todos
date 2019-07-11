@@ -14,11 +14,13 @@ import {
 	More,
 	Remove,
 	Task,
+	ToggleWrap,
 } from './styles';
 
 const Todo = props => {
 	const [ task, setTask ] = useState( props.task );
 	const [ editing, setEditing ] = useState( false );
+	const [ visible, setVisible ] = useState( false );
 	const {
 		completed,
 		handleCompletion,
@@ -39,6 +41,10 @@ const Todo = props => {
 		)
 		setEditing( false );
 	};
+
+	const handleMoreNav = () => {
+		setVisible( ! visible )
+	}
 
 	return (
 		<List initialPose="exit" pose="enter">
@@ -62,15 +68,17 @@ const Todo = props => {
 					</Task>
 				)
 			}
-			<More>
+			<More isVisible={ visible } onClick={ handleMoreNav }>
 				<FiMoreVertical />
 			</More>
-			<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
-				{ completed ? <FiCheckSquare /> : <FiSquare /> }
-			</Check>
-			<Remove onClick={ () => handleRemove( id ) }>
-				<FiX />
-			</Remove>
+			<ToggleWrap onMouseLeave={ handleMoreNav } isVisible={ visible }>
+				<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
+					{ completed ? <FiCheckSquare /> : <FiSquare /> }
+				</Check>
+				<Remove onClick={ () => handleRemove( id ) }>
+					<FiX />
+				</Remove>
+			</ToggleWrap>
 		</List>
 	)
 }
