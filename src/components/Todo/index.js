@@ -57,13 +57,18 @@ const Todo = props => {
 							name='task'
 							onChange={ event => setTask( event.target.value ) }
 							onBlur={ handleUpdate }
+							onTouchEnd={ handleUpdate }
 							type="text"
 							value={ task }
 						/>
 					</Form>
 				)
 				: (
-					<Task completed={ completed } onDoubleClick={ handleEdit }>
+					<Task
+						completed={ completed }
+						onDoubleClick={ handleEdit }
+						onTouchStart={ handleEdit }
+					>
 						{ task }
 					</Task>
 				)
