@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
 	FiCheckSquare,
+	FiMoreVertical,
 	FiSquare,
 	FiX,
 } from 'react-icons/fi';
@@ -10,6 +11,7 @@ import {
 	Input,
 	Form,
 	List,
+	More,
 	Remove,
 	Task,
 } from './styles';
@@ -60,6 +62,9 @@ const Todo = props => {
 					</Task>
 				)
 			}
+			<More>
+				<FiMoreVertical />
+			</More>
 			<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
 				{ completed ? <FiCheckSquare /> : <FiSquare /> }
 			</Check>

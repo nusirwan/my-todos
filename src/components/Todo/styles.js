@@ -80,6 +80,18 @@ const BaseButton = styled.button`
 	}
 `;
 
+export const More = styled( BaseButton )`
+	visibility: visible;
+	opacity: 1;
+	transition: visibility 0.1s, opacity 0.5s;
+
+	svg {
+		width: 1.25rem;
+		height: 1.25rem;
+		color: ${ colors.silverChalice };
+	}
+`;
+
 export const Remove = styled( BaseButton )`
 	svg {
 		width: 1.375rem;
