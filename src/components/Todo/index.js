@@ -39,10 +39,10 @@ const Todo = props => {
 	};
 
 	return (
-		<List>
+		<List initialPose="exit" pose="enter">
 			{ editing
 				? (
-					<Form onSubmit={ handleUpdate }>
+					<Form onSubmit={ handleUpdate } initialPose="exit" pose="enter">
 						<Input
 							autoComplete="off"
 							autoFocus={ true }
