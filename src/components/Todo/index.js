@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
 	FiCheckSquare,
+	FiMoreVertical,
 	FiSquare,
 	FiX,
 } from 'react-icons/fi';
@@ -10,13 +11,16 @@ import {
 	Input,
 	Form,
 	List,
+	More,
 	Remove,
 	Task,
+	ToggleWrap,
 } from './styles';
 
 const Todo = props => {
 	const [ task, setTask ] = useState( props.task );
 	const [ editing, setEditing ] = useState( false );
+	const [ visible, setVisible ] = useState( false );
 	const {
 		completed,
 		handleCompletion,
@@ -38,6 +42,10 @@ const Todo = props => {
 		setEditing( false );
 	};
 
+	const handleMoreNav = () => {
+		setVisible( ! visible )
+	}
+
 	return (
 		<List initialPose="exit" pose="enter">
 			{ editing
@@ -49,23 +57,33 @@ const Todo = props => {
 							name='task'
 							onChange={ event => setTask( event.target.value ) }
 							onBlur={ handleUpdate }
+							onTouchEnd={ handleUpdate }
 							type="text"
 							value={ task }
 						/>
 					</Form>
 				)
 				: (
-					<Task completed={ completed } onDoubleClick={ handleEdit }>
+					<Task
+						completed={ completed }
+						onDoubleClick={ handleEdit }
+						onTouchStart={ handleEdit }
+					>
 						{ task }
 					</Task>
 				)
 			}
-			<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
-				{ completed ? <FiCheckSquare /> : <FiSquare /> }
-			</Check>
-			<Remove onClick={ () => handleRemove( id ) }>
-				<FiX />
-			</Remove>
+			<More isVisible={ visible } onClick={ handleMoreNav }>
+				<FiMoreVertical />
+			</More>
+			<ToggleWrap onMouseLeave={ handleMoreNav } isVisible={ visible }>
+				<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
+					{ completed ? <FiCheckSquare /> : <FiSquare /> }
+				</Check>
+				<Remove onClick={ () => handleRemove( id ) }>
+					<FiX />
+				</Remove>
+			</ToggleWrap>
 		</List>
 	)
 }
