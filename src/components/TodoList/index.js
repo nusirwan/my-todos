@@ -22,10 +22,10 @@ class TodoList extends Component {
 
 	async componentDidMount() {
 		await axios.get( '/mytodos' )
-			.then( respone => {
+			.then( response => {
 				setTimeout( () => {
 					this.setState( {
-						todos: respone.data,
+						todos: response.data,
 						loading: false,
 					} )
 				}, 1000 );
@@ -37,19 +37,22 @@ class TodoList extends Component {
 						error: true,
 					} )
 				}, 1000 );
-			} );
+			} )
 	}
 
 	add = async newTodos => {
 		await axios.post( '/mytodos', newTodos )
-			.then( respone => {
+			.then( response => {
 				this.setState( {
 					todos: [
 						...this.state.todos,
-						respone.data,
+						response.data,
 					],
 				} )
-			} );
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
 	remove = id => {
@@ -133,7 +136,7 @@ class TodoList extends Component {
 					error
 						? (
 							<LoaderWrap>
-								<ErrorTitle>Ops... File Not Found!</ErrorTitle>
+								<ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
 							</LoaderWrap>
 						)
 						: (
