@@ -6,7 +6,7 @@ import axios from '../../axios'
 import Navigation from '../Navigation';
 import Todo from '../Todo';
 
-import { Todos, LoaderWrap, Wraper } from './styles';
+import { Todos, LoaderWrap, Wraper, ErrorTitle } from './styles';
 
 class TodoList extends Component {
 	state = {
@@ -123,7 +123,7 @@ class TodoList extends Component {
 					error
 						? (
 							<LoaderWrap>
-								<h1>File Not Found!!</h1>
+								<ErrorTitle>Ops... File Not Found!</ErrorTitle>
 							</LoaderWrap>
 						)
 						: (
