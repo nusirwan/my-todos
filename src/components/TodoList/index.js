@@ -13,17 +13,26 @@ class TodoList extends Component {
 		todos: [],
 		todoToShow: 'all',
 		loading: true,
+		error: false,
 	};
 
 	async componentDidMount() {
-		const respone = await axios.get( '/mytodos' );
-
-		setTimeout( () => {
-			this.setState( {
-				todos: respone.data,
-				loading: false,
+		await axios.get( '/mytodos' )
+			.then( respone => {
+				setTimeout( () => {
+					this.setState( {
+						todos: respone.data,
+						loading: false,
+					} )
+				}, 1000 );
 			} )
-		}, 1000 );
+			.catch( () => {
+				// console.log( error )
+				this.setState( {
+					// loading: false,
+					error: true,
+				} )
+			} );
 	}
 
 	add = newTodos => {
@@ -81,7 +90,7 @@ class TodoList extends Component {
 
 	render() {
 		const { add, updateTodoToShow, remove, toggleCompletion, update } = this;
-		const { todoToShow, loading } = this.state;
+		const { todoToShow, loading, error } = this.state;
 
 		let todos = [];
 		if ( todoToShow === 'all' ) {
@@ -110,19 +119,29 @@ class TodoList extends Component {
 						</LoaderWrap>
 					)
 				}
-				<Todos>
-					{ todos.map( todo => (
-						<Todo
-							key={ todo.id }
-							id={ todo.id }
-							task={ todo.task }
-							completed={ todo.completed }
-							handleRemove={ remove }
-							handleCompletion={ toggleCompletion }
-							updateTodo={ update }
-						/>
-					) ) }
-				</Todos>
+				{
+					error
+						? (
+							<LoaderWrap>
+								<h1>File Not Found!!</h1>
+							</LoaderWrap>
+						)
+						: (
+							<Todos>
+								{ todos.map( todo => (
+									<Todo
+										key={ todo.id }
+										id={ todo.id }
+										task={ todo.task }
+										completed={ todo.completed }
+										handleRemove={ remove }
+										handleCompletion={ toggleCompletion }
+										updateTodo={ update }
+									/>
+								) ) }
+							</Todos>
+						)
+				}
 			</Wraper>
 		);
 	}
