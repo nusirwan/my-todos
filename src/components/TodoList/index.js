@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner'
-import uuid from 'uuid/v4';
 
 import axios from '../../axios'
 import Navigation from '../Navigation';
@@ -41,17 +40,16 @@ class TodoList extends Component {
 			} );
 	}
 
-	add = newTodos => {
-		this.setState( {
-			todos: [
-				...this.state.todos,
-				{
-					id: uuid(),
-					task: newTodos,
-					completed: false,
-				},
-			],
-		} )
+	add = async newTodos => {
+		await axios.post( '/mytodos', newTodos )
+			.then( respone => {
+				this.setState( {
+					todos: [
+						...this.state.todos,
+						respone.data,
+					],
+				} )
+			} );
 	}
 
 	remove = id => {
