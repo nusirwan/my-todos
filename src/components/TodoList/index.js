@@ -6,14 +6,19 @@ import axios from '../../axios'
 import Navigation from '../Navigation';
 import Todo from '../Todo';
 
-import { Todos, LoaderWrap, Wraper, ErrorTitle } from './styles';
+import {
+	ErrorTitle,
+	LoaderWrap,
+	Todos,
+	Wraper,
+} from './styles';
 
 class TodoList extends Component {
 	state = {
+		error: false,
+		loading: true,
 		todos: [],
 		todoToShow: 'all',
-		loading: true,
-		error: false,
 	};
 
 	async componentDidMount() {
@@ -27,7 +32,6 @@ class TodoList extends Component {
 				}, 1000 );
 			} )
 			.catch( () => {
-				// console.log( error )
 				setTimeout( () => {
 					this.setState( {
 						loading: false,
@@ -91,8 +95,14 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { add, updateTodoToShow, remove, toggleCompletion, update } = this;
-		const { todoToShow, loading, error } = this.state;
+		const {
+			add,
+			remove,
+			toggleCompletion,
+			updateTodoToShow,
+			update,
+		} = this;
+		const { error, loading, todoToShow  } = this.state;
 
 		let todos = [];
 		if ( todoToShow === 'all' ) {
@@ -113,9 +123,9 @@ class TodoList extends Component {
 					loading && (
 						<LoaderWrap>
 							<Loader
-								type="Oval"
 								color="grey"
 								height={ 32 }
+								type="Oval"
 								width={ 32 }
 							/>
 						</LoaderWrap>
@@ -134,10 +144,10 @@ class TodoList extends Component {
 									<Todo
 										key={ todo.id }
 										id={ todo.id }
-										task={ todo.task }
 										completed={ todo.completed }
-										handleRemove={ remove }
 										handleCompletion={ toggleCompletion }
+										handleRemove={ remove }
+										task={ todo.task }
 										updateTodo={ update }
 									/>
 								) ) }
