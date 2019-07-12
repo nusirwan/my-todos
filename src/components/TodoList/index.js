@@ -28,10 +28,12 @@ class TodoList extends Component {
 			} )
 			.catch( () => {
 				// console.log( error )
-				this.setState( {
-					// loading: false,
-					error: true,
-				} )
+				setTimeout( () => {
+					this.setState( {
+						loading: false,
+						error: true,
+					} )
+				}, 1000 );
 			} );
 	}
 
