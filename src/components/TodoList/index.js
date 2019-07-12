@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
+// import axios from 'axios';
 import uuid from 'uuid/v4';
 
+import axios from '../../axios'
 import Navigation from '../Navigation';
 import Todo from '../Todo';
 
 import { Todos, Wraper } from './styles';
 
-const initTodos = [
-	{
-		id: uuid(),
-		task: 'Buy running shoes',
-		completed: false,
-	},
-	{
-		id: uuid(),
-		task: 'Run two miles with Lisa',
-		completed: true,
-	},
-];
-
 class TodoList extends Component {
 	state = {
-		todos: initTodos,
+		todos: [],
 		todoToShow: 'all',
 	};
+
+	async componentDidMount() {
+		const respone = await axios.get( '/mytodos' );
+		this.setState( {
+			todos: respone.data,
+		} )
+	}
 
 	add = newTodos => {
 		this.setState( {
