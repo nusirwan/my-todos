@@ -15,6 +15,15 @@ export const Wraper = styled.div`
 	}
 `;
 
+export const LoaderWrap = styled.div`
+	margin-top: 4rem;
+
+	div {
+		display: flex;
+		justify-content: center;
+	}
+`;
+
 export const Todos = styled.ul`
 	padding-left: 0;
 `;

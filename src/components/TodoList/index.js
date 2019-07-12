@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Loader from 'react-loader-spinner'
 import uuid from 'uuid/v4';
 
 import axios from '../../axios'
 import Navigation from '../Navigation';
 import Todo from '../Todo';
 
-import { Todos, Wraper } from './styles';
+import { Todos, LoaderWrap, Wraper } from './styles';
 
 class TodoList extends Component {
 	state = {
@@ -16,9 +17,13 @@ class TodoList extends Component {
 
 	async componentDidMount() {
 		const respone = await axios.get( '/mytodos' );
-		this.setState( {
-			todos: respone.data,
-		} )
+
+		setTimeout( () => {
+			this.setState( {
+				todos: respone.data,
+				loading: false,
+			} )
+		}, 1000 );
 	}
 
 	add = newTodos => {
@@ -76,7 +81,7 @@ class TodoList extends Component {
 
 	render() {
 		const { add, updateTodoToShow, remove, toggleCompletion, update } = this;
-		const { todoToShow } = this.state;
+		const { todoToShow, loading } = this.state;
 
 		let todos = [];
 		if ( todoToShow === 'all' ) {
@@ -93,6 +98,18 @@ class TodoList extends Component {
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
 				/>
+				{
+					loading && (
+						<LoaderWrap>
+							<Loader
+								type="Oval"
+								color="grey"
+								height={ 32 }
+								width={ 32 }
+							/>
+						</LoaderWrap>
+					)
+				}
 				<Todos>
 					{ todos.map( todo => (
 						<Todo
