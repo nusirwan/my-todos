@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import uuid from 'uuid/v4';
 
 import axios from '../../axios'
@@ -12,6 +11,7 @@ class TodoList extends Component {
 	state = {
 		todos: [],
 		todoToShow: 'all',
+		loading: true,
 	};
 
 	async componentDidMount() {
