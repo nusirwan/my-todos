@@ -55,12 +55,16 @@ class TodoList extends Component {
 			} )
 	}
 
-	remove = id => {
-		this.setState( {
-			todos: this.state.todos.filter( todo =>
-				todo.id !== id
-			),
-		} )
+	remove = async id => {
+		await axios.delete( `/mytodos/${ id }` )
+			.then( () => {
+				const todos = this.state.todos;
+				const updatedTodos = todos.filter( todo => todo.id !== id );
+				this.setState( { todos: updatedTodos } )
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
 	update = ( id, updatedTask ) => {
