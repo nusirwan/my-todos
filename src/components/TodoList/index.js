@@ -86,17 +86,23 @@ class TodoList extends Component {
 			} )
 	}
 
-	toggleCompletion = id => {
-		const updatedTodos = this.state.todos.map( todo => {
-			if ( todo.id === id ) {
-				return {
-					...todo,
-					completed: ! todo.completed,
-				}
-			}
-			return todo
-		} );
-		this.setState( { todos: updatedTodos } );
+	toggleCompletion = async ( id, completed ) => {
+		await axios.put( `/mytodos/${ id }`, { completed: ! completed } )
+			.then( response => {
+				const updatedTodos = this.state.todos.map( todo => {
+					if ( todo.id === id ) {
+						return {
+							...todo,
+							completed: response.data.completed,
+						}
+					}
+					return todo
+				} );
+				this.setState( { todos: updatedTodos } );
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
 	updateTodoToShow = filter => {
