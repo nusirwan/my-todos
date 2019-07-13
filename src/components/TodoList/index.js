@@ -69,12 +69,12 @@ class TodoList extends Component {
 
 	update = async ( id, updatedTask ) => {
 		await axios.put( `/mytodos/${ id }`, { task: updatedTask } )
-			.then( () => {
+			.then( response => {
 				const updatedTodos = this.state.todos.map( todo => {
 					if ( todo.id === id ) {
 						return {
 							...todo,
-							task: updatedTask,
+							task: response.task,
 						}
 					}
 					return todo;
