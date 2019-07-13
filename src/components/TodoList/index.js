@@ -1,75 +1,108 @@
 import React, { Component } from 'react';
-import uuid from 'uuid/v4';
+import Loader from 'react-loader-spinner'
 
+import axios from '../../axios'
 import Navigation from '../Navigation';
 import Todo from '../Todo';
 
-import { Todos, Wraper } from './styles';
-
-const initTodos = [
-	{
-		id: uuid(),
-		task: 'Buy running shoes',
-		completed: false,
-	},
-	{
-		id: uuid(),
-		task: 'Run two miles with Lisa',
-		completed: true,
-	},
-];
+import {
+	ErrorTitle,
+	LoaderWrap,
+	Todos,
+	Wraper,
+} from './styles';
 
 class TodoList extends Component {
 	state = {
-		todos: initTodos,
+		error: false,
+		loading: true,
+		todos: [],
 		todoToShow: 'all',
 	};
 
-	add = newTodos => {
-		this.setState( {
-			todos: [
-				...this.state.todos,
-				{
-					id: uuid(),
-					task: newTodos,
-					completed: false,
-				},
-			],
-		} )
+	async componentDidMount() {
+		await axios.get( '/mytodos' )
+			.then( response => {
+				setTimeout( () => {
+					this.setState( {
+						todos: response.data,
+						loading: false,
+					} )
+				}, 1000 );
+			} )
+			.catch( () => {
+				setTimeout( () => {
+					this.setState( {
+						loading: false,
+						error: true,
+					} )
+				}, 1000 );
+			} )
 	}
 
-	remove = id => {
-		this.setState( {
-			todos: this.state.todos.filter( todo =>
-				todo.id !== id
-			),
-		} )
+	add = async newTodos => {
+		await axios.post( '/mytodos', newTodos )
+			.then( response => {
+				this.setState( {
+					todos: [
+						...this.state.todos,
+						response.data,
+					],
+				} )
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
-	update = ( id, updatedTask ) => {
-		const updatedTodos = this.state.todos.map( todo => {
-			if ( todo.id === id ) {
-				return {
-					...todo,
-					task: updatedTask,
-				}
-			}
-			return todo;
-		} );
-		this.setState( { todos: updatedTodos } );
+	remove = async id => {
+		await axios.delete( `/mytodos/${ id }` )
+			.then( () => {
+				const todos = this.state.todos;
+				const updatedTodos = todos.filter( todo => todo.id !== id );
+				this.setState( { todos: updatedTodos } )
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
-	toggleCompletion = id => {
-		const updatedTodos = this.state.todos.map( todo => {
-			if ( todo.id === id ) {
-				return {
-					...todo,
-					completed: ! todo.completed,
-				}
-			}
-			return todo
-		} );
-		this.setState( { todos: updatedTodos } );
+	update = async ( id, updatedTask ) => {
+		await axios.put( `/mytodos/${ id }`, { task: updatedTask } )
+			.then( response => {
+				const updatedTodos = this.state.todos.map( todo => {
+					if ( todo.id === id ) {
+						return {
+							...todo,
+							task: response.task,
+						}
+					}
+					return todo;
+				} );
+				this.setState( { todos: updatedTodos } );
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
+	}
+
+	toggleCompletion = async ( id, completed ) => {
+		await axios.put( `/mytodos/${ id }`, { completed: ! completed } )
+			.then( response => {
+				const updatedTodos = this.state.todos.map( todo => {
+					if ( todo.id === id ) {
+						return {
+							...todo,
+							completed: response.data.completed,
+						}
+					}
+					return todo
+				} );
+				this.setState( { todos: updatedTodos } );
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
 	updateTodoToShow = filter => {
@@ -79,8 +112,14 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { add, updateTodoToShow, remove, toggleCompletion, update } = this;
-		const { todoToShow } = this.state;
+		const {
+			add,
+			remove,
+			toggleCompletion,
+			updateTodoToShow,
+			update,
+		} = this;
+		const { error, loading, todoToShow  } = this.state;
 
 		let todos = [];
 		if ( todoToShow === 'all' ) {
@@ -97,19 +136,41 @@ class TodoList extends Component {
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
 				/>
-				<Todos>
-					{ todos.map( todo => (
-						<Todo
-							key={ todo.id }
-							id={ todo.id }
-							task={ todo.task }
-							completed={ todo.completed }
-							handleRemove={ remove }
-							handleCompletion={ toggleCompletion }
-							updateTodo={ update }
-						/>
-					) ) }
-				</Todos>
+				{
+					loading && (
+						<LoaderWrap>
+							<Loader
+								color="grey"
+								height={ 32 }
+								type="Oval"
+								width={ 32 }
+							/>
+						</LoaderWrap>
+					)
+				}
+				{
+					error
+						? (
+							<LoaderWrap>
+								<ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
+							</LoaderWrap>
+						)
+						: (
+							<Todos>
+								{ todos.map( todo => (
+									<Todo
+										key={ todo.id }
+										id={ todo.id }
+										completed={ todo.completed }
+										handleRemove={ remove }
+										toggleCompletion={ toggleCompletion }
+										task={ todo.task }
+										updateTodo={ update }
+									/>
+								) ) }
+							</Todos>
+						)
+				}
 			</Wraper>
 		);
 	}

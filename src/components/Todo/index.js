@@ -19,11 +19,11 @@ import {
 
 const Todo = props => {
 	const [ task, setTask ] = useState( props.task );
+	const [ completed, setCompleted ] = useState( props.completed );
 	const [ editing, setEditing ] = useState( false );
 	const [ visible, setVisible ] = useState( false );
 	const {
-		completed,
-		handleCompletion,
+		toggleCompletion,
 		handleRemove,
 		id,
 		updateTodo,
@@ -40,6 +40,14 @@ const Todo = props => {
 			task,
 		)
 		setEditing( false );
+	};
+
+	const handleCompletion = () => {
+		toggleCompletion(
+			id,
+			completed,
+		)
+		setCompleted( ! completed );
 	};
 
 	const handleMoreNav = () => {
@@ -77,7 +85,7 @@ const Todo = props => {
 				<FiMoreVertical />
 			</More>
 			<ToggleWrap onMouseLeave={ handleMoreNav } isVisible={ visible }>
-				<Check completed={ completed } onClick={ () => handleCompletion( id ) }>
+				<Check completed={ completed } onClick={ handleCompletion }>
 					{ completed ? <FiCheckSquare /> : <FiSquare /> }
 				</Check>
 				<Remove onClick={ () => handleRemove( id ) }>

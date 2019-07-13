@@ -13,7 +13,10 @@ const NewTodoForm = props => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		addTodo( task );
+		addTodo( {
+			task: task,
+			completed: false,
+		} );
 		setTask( '' );
 	}
 
