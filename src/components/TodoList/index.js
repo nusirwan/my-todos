@@ -67,17 +67,23 @@ class TodoList extends Component {
 			} )
 	}
 
-	update = ( id, updatedTask ) => {
-		const updatedTodos = this.state.todos.map( todo => {
-			if ( todo.id === id ) {
-				return {
-					...todo,
-					task: updatedTask,
-				}
-			}
-			return todo;
-		} );
-		this.setState( { todos: updatedTodos } );
+	update = async ( id, updatedTask ) => {
+		axios.put( `/mytodos/${ id }`, { task: updatedTask } )
+			.then( () => {
+				const updatedTodos = this.state.todos.map( todo => {
+					if ( todo.id === id ) {
+						return {
+							...todo,
+							task: updatedTask,
+						}
+					}
+					return todo;
+				} );
+				this.setState( { todos: updatedTodos } );
+			} )
+			.catch( () => {
+				this.setState( { error: true } )
+			} )
 	}
 
 	toggleCompletion = id => {
