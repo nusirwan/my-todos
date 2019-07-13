@@ -156,8 +156,8 @@ class TodoList extends Component {
 										key={ todo.id }
 										id={ todo.id }
 										completed={ todo.completed }
-										handleCompletion={ toggleCompletion }
 										handleRemove={ remove }
+										toggleCompletion={ toggleCompletion }
 										task={ todo.task }
 										updateTodo={ update }
 									/>
