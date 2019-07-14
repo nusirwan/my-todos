@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import theme from '../../base-styles/theme';
 
@@ -10,8 +10,9 @@ export const Header = styled.header`
 	height: ${ props => props.formShow ? '100px' : '40px' };
 `;
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.div`
 	display: flex;
+	position: relative;
 	align-items: center;
 `;
 
@@ -25,6 +26,21 @@ export const Title = styled.h1`
 		font-size: 2rem;
 		padding-bottom: 0.5rem;
 	}
+`;
+
+export const Nav = styled.nav`
+	display: inherit;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.1s, opacity 0.5s;
+
+	${ props => props.isVisible && css`
+		visibility: visible;
+		opacity: 1;
+	`}
 `;
 
 export const Select = styled.select`

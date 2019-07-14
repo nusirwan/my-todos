@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { FiPlusSquare } from 'react-icons/fi';
 
 import Loader from '../Loader';
@@ -8,6 +8,7 @@ import {
 	Add,
 	Divider,
 	Header,
+	Nav,
 	Select,
 	Title,
 	Wrapper,
@@ -26,26 +27,21 @@ const Navigation = props => {
 		<Header formShow={ formShow }>
 			<Wrapper>
 				<Title>my Todos</Title>
-				{
-					loading
-						? <Loader isVisible={ loading }/>
-						: (
-							<Fragment>
-								<Select name="todos" onChange={ handleChange }>
-									<option value="all" defaultValue>All</option>
-									<option value="active">Active</option>
-									<option value="complete">Complete</option>
-								</Select>
-								<Divider />
-								<Add
-									formShow={ formShow }
-									onClick={ () => setFormShow( ! formShow ) }
-								>
-									<FiPlusSquare />
-								</Add>
-							</Fragment>
-						)
-				}
+				<Loader isVisible={ loading }/>
+				<Nav isVisible={ ! loading }>
+					<Select name="todos" onChange={ handleChange }>
+						<option value="all" defaultValue>All</option>
+						<option value="active">Active</option>
+						<option value="complete">Complete</option>
+					</Select>
+					<Divider />
+					<Add
+						formShow={ formShow }
+						onClick={ () => setFormShow( ! formShow ) }
+					>
+						<FiPlusSquare />
+					</Add>
+				</Nav>
 			</Wrapper>
 			<NewTodoForm addTodo={ props.addTodo } isVisible={ formShow } />
 		</Header>
