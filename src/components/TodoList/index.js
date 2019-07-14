@@ -74,7 +74,7 @@ class TodoList extends Component {
 					if ( todo.id === id ) {
 						return {
 							...todo,
-							task: response.task,
+							task: response.data.task,
 						}
 					}
 					return todo;
