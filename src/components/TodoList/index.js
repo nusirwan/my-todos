@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import axios from '../../axios'
 import Navigation from '../Navigation';
-import Loader from '../Loader';
 import Todo from '../Todo';
 
 import {
@@ -134,8 +133,8 @@ class TodoList extends Component {
 				<Navigation
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
+					loading={ loading }
 				/>
-				{ loading && <Loader /> }
 				{
 					error
 						? <ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
