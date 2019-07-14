@@ -3,9 +3,9 @@ import Spinner from 'react-loader-spinner';
 
 import { Title, Wrapper } from './styles';
 
-const Loader = () => {
+const Loader = props => {
 	return (
-		<Wrapper>
+		<Wrapper isVisible={ props.isVisible }>
 			<Spinner
 				color="#3295a1"
 				height={ 18 }
