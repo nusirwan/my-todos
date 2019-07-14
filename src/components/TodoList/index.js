@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Loader from 'react-loader-spinner'
 
 import axios from '../../axios'
 import Navigation from '../Navigation';
+import Loader from '../Loader';
 import Todo from '../Todo';
 
 import {
 	ErrorTitle,
-	LoaderWrap,
 	Todos,
 	Wraper,
 } from './styles';
@@ -136,25 +135,10 @@ class TodoList extends Component {
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
 				/>
-				{
-					loading && (
-						<LoaderWrap>
-							<Loader
-								color="grey"
-								height={ 32 }
-								type="Oval"
-								width={ 32 }
-							/>
-						</LoaderWrap>
-					)
-				}
+				{ loading && <Loader /> }
 				{
 					error
-						? (
-							<LoaderWrap>
-								<ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
-							</LoaderWrap>
-						)
+						? <ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
 						: (
 							<Todos>
 								{ todos.map( todo => (
