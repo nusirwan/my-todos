@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import theme from '../../base-styles/theme';
 
@@ -7,24 +7,40 @@ const { breakpoints, colors } = theme;
 export const Header = styled.header`
 	display: block;
 	transition: all 0.2s ease-in;
-	height: ${ props => props.isVisible ? '100px' : '40px' };
+	height: ${ props => props.formShow ? '100px' : '40px' };
 `;
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.div`
 	display: flex;
+	position: relative;
 	align-items: center;
 `;
 
 export const Title = styled.h1`
 	flex-grow: 1;
 	padding-bottom: 0.375rem;
-	border-radius: 0.25rem;
 	font-size: 1.5rem;
 	color: ${ colors.sanJuan };
 
 	@media ( ${ breakpoints.mobile } ) {
 		font-size: 2rem;
+		padding-bottom: 0.5rem;
 	}
+`;
+
+export const Nav = styled.nav`
+	display: inherit;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.1s, opacity 0.5s;
+
+	${ props => props.isVisible && css`
+		visibility: visible;
+		opacity: 1;
+	`}
 `;
 
 export const Select = styled.select`
@@ -33,8 +49,7 @@ export const Select = styled.select`
 	cursor: pointer;
 	border: none;
 	box-sizing: border-box;
-    -webkit-appearance: none;
-	-moz-appearance: none;
+    appearance: none;
 	background: url( "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%238C98F2'><polygon points='0,0 100,0 50,50'/></svg>" ) no-repeat;
 	background-size: 0.75rem;
 	background-position: right;
@@ -62,11 +77,10 @@ export const Divider = styled.span`
 export const Add = styled.button`
 	display: flex;
 	align-items: center;
-	margin-right: 0.375em;
 	padding-left: 0.125em;
-	padding-top: 1.125em;
+	padding-top: 0.125em;
 	padding-right: 0.125em;
-	padding-bottom: 1.125em;
+	padding-bottom: 0.125em;
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
@@ -74,7 +88,7 @@ export const Add = styled.button`
 	svg {
 		width: 1.375rem;
 		height: 1.375rem;
-		color: ${ props => props.isVisible ? `${ colors.sanJuan }` : `${ colors.silverChalice }` };
+		color: ${ props => props.formShow ? `${ colors.sanJuan }` : `${ colors.silverChalice }` };
 		transition: color 0.1s ease-in;
 	}
 

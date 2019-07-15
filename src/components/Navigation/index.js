@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import { FiPlusSquare } from 'react-icons/fi';
 
+import Loader from '../Loader';
 import NewTodoForm from '../NewTodoForm';
 
 import {
 	Add,
 	Divider,
 	Header,
+	Nav,
 	Select,
 	Title,
 	Wrapper,
 } from './styles';
 
 const Navigation = props => {
-	const [ visible, setVisible ] = useState( false );
+	const [ formShow, setFormShow ] = useState( false );
+	const { loading } = props;
 
 	const handleChange = event => {
 		event.preventDefault();
@@ -21,23 +24,26 @@ const Navigation = props => {
 	}
 
 	return (
-		<Header isVisible={ visible }>
+		<Header formShow={ formShow }>
 			<Wrapper>
 				<Title>my Todos</Title>
-				<Select name="todos" onChange={ handleChange }>
-					<option value="all" defaultValue>All</option>
-					<option value="active">Active</option>
-					<option value="complete">Complete</option>
-				</Select>
-				<Divider />
-				<Add
-					isVisible={ visible }
-					onClick={ () => setVisible( ! visible ) }
-				>
-					<FiPlusSquare />
-				</Add>
+				<Loader isVisible={ loading }/>
+				<Nav isVisible={ ! loading }>
+					<Select name="todos" onChange={ handleChange }>
+						<option value="all" defaultValue>All</option>
+						<option value="active">Active</option>
+						<option value="complete">Complete</option>
+					</Select>
+					<Divider />
+					<Add
+						formShow={ formShow }
+						onClick={ () => setFormShow( ! formShow ) }
+					>
+						<FiPlusSquare />
+					</Add>
+				</Nav>
 			</Wrapper>
-			<NewTodoForm addTodo={ props.addTodo } isVisible={ visible } />
+			<NewTodoForm addTodo={ props.addTodo } isVisible={ formShow } />
 		</Header>
 	)
 }

@@ -15,13 +15,9 @@ export const Wraper = styled.div`
 	}
 `;
 
-export const LoaderWrap = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-top: 4rem;
-`;
-
 export const ErrorTitle = styled.h2`
+	margin-top: 4rem;
+	text-align: center;
 	font-size: 1rem;
 	color: ${ colors.carnation }
 `
