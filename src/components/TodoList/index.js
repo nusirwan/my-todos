@@ -39,6 +39,7 @@ class TodoList extends Component {
 	}
 
 	add = async newTodos => {
+		this.setState( { loading: true } )
 		await axios.post( '/mytodos', newTodos )
 			.then( response => {
 				this.setState( {
@@ -46,26 +47,38 @@ class TodoList extends Component {
 						...this.state.todos,
 						response.data,
 					],
+					loading: false,
 				} )
 			} )
 			.catch( () => {
-				this.setState( { error: true } )
+				this.setState( {
+					error: true,
+					loading: false,
+				} )
 			} )
 	}
 
 	remove = async id => {
+		this.setState( { loading: true } )
 		await axios.delete( `/mytodos/${ id }` )
 			.then( () => {
 				const todos = this.state.todos;
 				const updatedTodos = todos.filter( todo => todo.id !== id );
-				this.setState( { todos: updatedTodos } )
+				this.setState( {
+					todos: updatedTodos,
+					loading: false,
+				} )
 			} )
 			.catch( () => {
-				this.setState( { error: true } )
+				this.setState( {
+					error: true,
+					loading: false,
+				} )
 			} )
 	}
 
 	update = async ( id, updatedTask ) => {
+		this.setState( { loading: true } )
 		await axios.put( `/mytodos/${ id }`, { task: updatedTask } )
 			.then( response => {
 				const updatedTodos = this.state.todos.map( todo => {
@@ -77,14 +90,21 @@ class TodoList extends Component {
 					}
 					return todo;
 				} );
-				this.setState( { todos: updatedTodos } );
+				this.setState( {
+					todos: updatedTodos,
+					loading: false,
+				} );
 			} )
 			.catch( () => {
-				this.setState( { error: true } )
+				this.setState( {
+					error: true,
+					loading: false,
+				} )
 			} )
 	}
 
 	toggleCompletion = async ( id, completed ) => {
+		this.setState( { loading: true } )
 		await axios.put( `/mytodos/${ id }`, { completed: ! completed } )
 			.then( response => {
 				const updatedTodos = this.state.todos.map( todo => {
@@ -96,10 +116,16 @@ class TodoList extends Component {
 					}
 					return todo
 				} );
-				this.setState( { todos: updatedTodos } );
+				this.setState( {
+					todos: updatedTodos,
+					loading: false,
+				} );
 			} )
 			.catch( () => {
-				this.setState( { error: true } )
+				this.setState( {
+					error: true,
+					loading: false,
+				} )
 			} )
 	}
 
