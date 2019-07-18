@@ -5,6 +5,8 @@ import theme from '../../base-styles/theme';
 
 const { colors } = theme;
 
+const TOGGLEWRAP_WIDTH = '6.25rem';
+
 const ListProps = posed.li( {
 	exit: {
 		opacity: 0,
@@ -18,15 +20,24 @@ const ListProps = posed.li( {
 
 export const List = styled( ListProps )`
 	display: flex;
-	align-items: center;
 	position: relative;
 	margin-top: 1em;
 	margin-bottom: 1em;
+`;
+
+export const TaskWrap = styled.div`
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
 	padding-left: 1em;
 	padding-right: 0.375em;
+	z-index: 1;
 	background-color: ${ colors.white };
-	border-radius: 0.25rem;
-	list-style:none;
+	transition: transform 0.2s ease-in;
+
+	${ props => props.isVisible && css`
+		transform: translate( -${ TOGGLEWRAP_WIDTH }, 0 );
+	`}
 `;
 
 export const Task = styled.span`
@@ -35,7 +46,6 @@ export const Task = styled.span`
 	margin-bottom: 1em;
 	padding-right: 2em;
 	font-size: 1rem;
-	text-decoration: none;
 	color: ${ colors.sanJuan };
 
 	${ props => props.completed && css`
@@ -65,12 +75,12 @@ export const Input = styled.input`
 
 const BaseButton = styled.button`
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	margin-right: 0.375em;
-	padding-left: 0.125em;
-	padding-top: 1.125em;
-	padding-right: 0.125em;
-	padding-bottom: 1.125em;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
@@ -81,38 +91,31 @@ const BaseButton = styled.button`
 `;
 
 export const More = styled( BaseButton )`
-	visibility: visible;
-	opacity: 1;
-	transition: visibility 0.1s, opacity 0.5s;
+	margin-right: 0.25em;
+	padding-left: 0.125em;
+	padding-top: 1.125em;
+	padding-right: 0.125em;
+	padding-bottom: 1.125em;
 
 	svg {
 		width: 1.25rem;
 		height: 1.25rem;
 		color: ${ colors.silverChalice };
 	}
-
-	${ props => props.isVisible && css`
-		visibility: hidden;
-		opacity: 0;
-	`}
 `;
 
 export const ToggleWrap = styled.div`
-	display: flex;
+	width: ${ TOGGLEWRAP_WIDTH };
+	height: 100%;
 	position: absolute;
 	right: 0;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0.1s, opacity 0.5s, transform 0.3s;
-
-	${ props => props.isVisible && css`
-		visibility: visible;
-		opacity: 1;
-		transform: translate( -5px, 0 );
-	`}
+	display: flex;
 `;
 
 export const Remove = styled( BaseButton )`
+	flex-basis: 50%;
+	background-color: ${ colors.turquoiseBlue };
+
 	svg {
 		width: 1.375rem;
 		height: 1.375rem;
@@ -121,6 +124,9 @@ export const Remove = styled( BaseButton )`
 `;
 
 export const Check = styled( BaseButton )`
+	flex-basis: 50%;
+	background-color: ${ colors.silverChalice };
+
 	svg {
 		width: 1.25rem;
 		height: 1.25rem;
