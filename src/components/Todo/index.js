@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
 	FiCheckSquare,
 	FiMoreVertical,
 	FiSquare,
 	FiX,
 } from 'react-icons/fi';
+
+import useOutsideClick from '../../utilities/useOutsideClick'
 
 import {
 	Check,
@@ -23,6 +25,7 @@ const Todo = props => {
 	const [ completed, setCompleted ] = useState( props.completed );
 	const [ editing, setEditing ] = useState( false );
 	const [ visible, setVisible ] = useState( false );
+	const toggleWrapRef = useRef();
 	const {
 		toggleCompletion,
 		handleRemove,
@@ -54,6 +57,12 @@ const Todo = props => {
 	const handleMoreNav = () => {
 		setVisible( ! visible )
 	}
+
+	useOutsideClick( toggleWrapRef, () => {
+		if ( visible ) {
+			setVisible( false )
+		}
+	} )
 
 	return (
 		<List initialPose="exit" pose="enter">
@@ -87,7 +96,7 @@ const Todo = props => {
 					<FiMoreVertical />
 				</More>
 			</TaskWrap>
-			<ToggleWrap>
+			<ToggleWrap ref={ toggleWrapRef }>
 				<Check completed={ completed } onClick={ handleCompletion }>
 					{ completed ? <FiCheckSquare /> : <FiSquare /> }
 				</Check>
