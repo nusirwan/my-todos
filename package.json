@@ -30,6 +30,7 @@
     "eslint-plugin-react-hooks": "^1.6.0",
     "file-loader": "^4.0.0",
     "fs-extra": "^8.0.1",
+    "hammerjs": "^2.0.8",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "husky": "^2.4.0",
     "identity-obj-proxy": "3.0.0",

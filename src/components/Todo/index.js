@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
 	FiCheckSquare,
 	FiMoreVertical,
 	FiSquare,
 	FiX,
 } from 'react-icons/fi';
+
+import useOutsideClick from '../../utilities/useOutsideClick'
 
 import {
 	Check,
@@ -14,6 +16,7 @@ import {
 	More,
 	Remove,
 	Task,
+	TaskWrap,
 	ToggleWrap,
 } from './styles';
 
@@ -22,6 +25,7 @@ const Todo = props => {
 	const [ completed, setCompleted ] = useState( props.completed );
 	const [ editing, setEditing ] = useState( false );
 	const [ visible, setVisible ] = useState( false );
+	const toggleWrapRef = useRef();
 	const {
 		toggleCompletion,
 		handleRemove,
@@ -54,37 +58,45 @@ const Todo = props => {
 		setVisible( ! visible )
 	}
 
+	useOutsideClick( toggleWrapRef, () => {
+		if ( visible ) {
+			setVisible( false )
+		}
+	} )
+
 	return (
 		<List initialPose="exit" pose="enter">
-			{ editing
-				? (
-					<Form onSubmit={ handleUpdate } initialPose="exit" pose="enter">
-						<Input
-							autoComplete="off"
-							autoFocus={ true }
-							name='task'
-							onChange={ event => setTask( event.target.value ) }
-							onBlur={ handleUpdate }
-							onTouchEnd={ handleUpdate }
-							type="text"
-							value={ task }
-						/>
-					</Form>
-				)
-				: (
-					<Task
-						completed={ completed }
-						onDoubleClick={ handleEdit }
-						onTouchStart={ handleEdit }
-					>
-						{ task }
-					</Task>
-				)
-			}
-			<More isVisible={ visible } onClick={ handleMoreNav }>
-				<FiMoreVertical />
-			</More>
-			<ToggleWrap onMouseLeave={ handleMoreNav } isVisible={ visible }>
+			<TaskWrap isVisible={ visible }>
+				{ editing
+					? (
+						<Form onSubmit={ handleUpdate } initialPose="exit" pose="enter">
+							<Input
+								autoComplete="off"
+								autoFocus={ true }
+								name='task'
+								onChange={ event => setTask( event.target.value ) }
+								onBlur={ handleUpdate }
+								onTouchEnd={ handleUpdate }
+								type="text"
+								value={ task }
+							/>
+						</Form>
+					)
+					: (
+						<Task
+							completed={ completed }
+							onDoubleClick={ handleEdit }
+							onTouchStart={ handleEdit }
+						>
+							{ task }
+						</Task>
+					)
+				}
+				<More onClick={ handleMoreNav }>
+					<FiMoreVertical />
+				</More>
+			</TaskWrap>
+			<ToggleWrap ref={ toggleWrapRef }>
 				<Check completed={ completed } onClick={ handleCompletion }>
 					{ completed ? <FiCheckSquare /> : <FiSquare /> }
 				</Check>
