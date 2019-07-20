@@ -139,11 +139,11 @@ class TodoList extends Component {
 		const {
 			add,
 			remove,
+			state: { error, loading, todoToShow  },
 			toggleCompletion,
 			updateTodoToShow,
 			update,
 		} = this;
-		const { error, loading, todoToShow  } = this.state;
 
 		let todos = [];
 		if ( todoToShow === 'all' ) {
