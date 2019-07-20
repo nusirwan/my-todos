@@ -146,12 +146,17 @@ class TodoList extends Component {
 		} = this;
 
 		let todos = [];
-		if ( todoToShow === 'all' ) {
-			todos = this.state.todos;
-		} else if ( todoToShow === 'active' ) {
-			todos = this.state.todos.filter( todo => ! todo.completed );
-		} else if ( todoToShow === 'complete' ) {
-			todos = this.state.todos.filter( todo => todo.completed );
+		// eslint-disable-next-line default-case
+		switch ( todoToShow ) {
+			case 'all':
+				todos = this.state.todos;
+				break;
+			case 'active':
+				todos = this.state.todos.filter( todo => ! todo.completed );
+				break;
+			case 'complete':
+				todos = this.state.todos.filter( todo => todo.completed );
+				break;
 		}
 
 		return (
