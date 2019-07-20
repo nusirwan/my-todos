@@ -125,11 +125,17 @@ export const Remove = styled( BaseButton )`
 
 export const Check = styled( BaseButton )`
 	flex-basis: 50%;
+	position: relative;
 	background-color: ${ colors.silverChalice };
 
 	svg {
+		position: absolute;
 		width: 1.25rem;
 		height: 1.25rem;
 		color: ${ colors.turquoiseBlue };
+
+		&:first-child {
+			visibility: ${ props => props.isVisible ? 'visible' : 'hidden' };
+		}
 	}
 `;

@@ -97,8 +97,13 @@ const Todo = props => {
 				</More>
 			</TaskWrap>
 			<ToggleWrap ref={ toggleWrapRef }>
-				<Check completed={ completed } onClick={ handleCompletion }>
-					{ completed ? <FiCheckSquare /> : <FiSquare /> }
+				<Check
+					completed={ completed }
+					isVisible={ completed }
+					onClick={ handleCompletion }
+				>
+					<FiCheckSquare />
+					<FiSquare />
 				</Check>
 				<Remove onClick={ () => handleRemove( id ) }>
 					<FiX />
