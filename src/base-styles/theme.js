@@ -16,4 +16,25 @@ export default {
 		neptune: 'rgb( 127, 167, 184 )',
 		carnation: 'rgb( 241, 72, 91 )',
 	},
+	transitions: {
+		leftFadeIn: {
+			exit: {
+				opacity: 0,
+				x: 4,
+			},
+			enter: {
+				opacity: 1,
+				x: 0,
+				transition: { duration: 400 },
+			},
+		},
+		openForm: {
+			open: {
+				height: '6.25rem',
+			},
+			closed: {
+				height: '2.5rem',
+			},
+		},
+	},
 };
