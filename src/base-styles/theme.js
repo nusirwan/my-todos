@@ -28,6 +28,11 @@ export default {
 				transition: { duration: 400 },
 			},
 		},
+		button: {
+			pressable: true,
+			init: { scale: 1 },
+			press: { scale: 0.94 },
+		},
 		openForm: {
 			open: {
 				height: '6.25rem',
