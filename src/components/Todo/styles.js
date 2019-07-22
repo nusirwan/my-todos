@@ -7,7 +7,7 @@ const { colors } = theme;
 
 const TOGGLEWRAP_WIDTH = '6.25rem';
 
-const ListProps = posed.li( {
+const ListProps = {
 	exit: {
 		opacity: 0,
 		y: -20,
@@ -16,16 +16,25 @@ const ListProps = posed.li( {
 	  opacity: 1,
 	  y: 0,
 	},
-} );
+};
 
-export const List = styled( ListProps )`
+export const List = styled( posed.li( ListProps ) )`
 	display: flex;
 	position: relative;
 	margin-top: 1em;
 	margin-bottom: 1em;
 `;
 
-export const TaskWrap = styled.div`
+const TaskWrapProps = {
+	open: {
+		x: `-${ TOGGLEWRAP_WIDTH }`,
+	},
+	closed: {
+		x: 0,
+	},
+};
+
+export const TaskWrap = styled( posed.div( TaskWrapProps ) )`
 	display: flex;
 	flex-grow: 1;
 	align-items: center;
@@ -33,11 +42,6 @@ export const TaskWrap = styled.div`
 	padding-right: 0.375em;
 	z-index: 1;
 	background-color: ${ colors.white };
-	transition: transform 0.2s ease-in;
-
-	${ props => props.isVisible && css`
-		transform: translate( -${ TOGGLEWRAP_WIDTH }, 0 );
-	`}
 `;
 
 export const Task = styled.span`

@@ -66,10 +66,10 @@ const Todo = props => {
 
 	return (
 		<List initialPose="exit" pose="enter">
-			<TaskWrap isVisible={ visible }>
+			<TaskWrap pose={ visible ? 'open' : 'closed' }>
 				{ editing
 					? (
-						<Form onSubmit={ handleUpdate } initialPose="exit" pose="enter">
+						<Form onSubmit={ handleUpdate }>
 							<Input
 								autoComplete="off"
 								autoFocus={ true }
