@@ -3,18 +3,16 @@ import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
 
-const { breakpoints, colors } = theme;
-
-const HeaderProps = {
-	open: {
-		height: '6.25rem',
+const {
+	breakpoints,
+	colors,
+	transitions: {
+		leftFadeIn,
+		openForm,
 	},
-	closed: {
-		height: '2.5rem',
-	},
-};
+} = theme;
 
-export const Header = styled( posed.header( HeaderProps ) )`
+export const Header = styled( posed.header( openForm ) )`
 	display: block;
 `;
 
@@ -24,7 +22,7 @@ export const Wrapper = styled.div`
 	align-items: center;
 `;
 
-export const Title = styled.h1`
+export const Title = styled( posed.h1( leftFadeIn ) )`
 	flex-grow: 1;
 	padding-bottom: 0.375rem;
 	font-size: 1.5rem;
