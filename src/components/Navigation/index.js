@@ -35,10 +35,7 @@ const Navigation = props => {
 						<option value="complete">Complete</option>
 					</Select>
 					<Divider />
-					<Add
-						formShow={ formShow }
-						onClick={ () => setFormShow( ! formShow ) }
-					>
+					<Add onClick={ () => setFormShow( ! formShow ) }>
 						<FiPlusSquare />
 					</Add>
 				</Nav>

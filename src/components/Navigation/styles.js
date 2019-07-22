@@ -9,6 +9,7 @@ const {
 	transitions: {
 		leftFadeIn,
 		openForm,
+		button,
 	},
 } = theme;
 
@@ -80,7 +81,7 @@ export const Divider = styled.span`
 	background-color: ${ colors.white };
 `
 
-export const Add = styled.button`
+export const Add = styled( posed.button( button ) )`
 	display: flex;
 	align-items: center;
 	padding-left: 0.125em;
@@ -90,18 +91,11 @@ export const Add = styled.button`
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
+	color: ${ colors.sanJuan };
 
 	svg {
 		width: 1.375rem;
 		height: 1.375rem;
-		color: ${ props => props.formShow ? `${ colors.sanJuan }` : `${ colors.silverChalice }` };
-		transition: color 0.1s ease-in;
-	}
-
-	&:hover {
-		svg {
-			color: ${ colors.sanJuan };
-		}
 	}
 
 	&:focus {
