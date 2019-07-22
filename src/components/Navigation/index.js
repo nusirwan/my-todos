@@ -26,7 +26,7 @@ const Navigation = props => {
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
-				<Title>my Todos</Title>
+				<Title initialPose="exit" pose="enter">my Todos</Title>
 				<Loader isVisible={ loading }/>
 				<Nav isVisible={ ! loading }>
 					<Select name="todos" onChange={ handleChange }>
