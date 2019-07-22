@@ -1,13 +1,21 @@
 import styled, { css } from 'styled-components';
+import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
 
 const { breakpoints, colors } = theme;
 
-export const Header = styled.header`
+const HeaderProps = {
+	open: {
+		height: '6.25rem',
+	},
+	closed: {
+		height: '2.5rem',
+	},
+};
+
+export const Header = styled( posed.header( HeaderProps ) )`
 	display: block;
-	transition: all 0.2s ease-in;
-	height: ${ props => props.formShow ? '100px' : '40px' };
 `;
 
 export const Wrapper = styled.div`

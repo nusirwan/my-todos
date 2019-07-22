@@ -24,7 +24,7 @@ const Navigation = props => {
 	}
 
 	return (
-		<Header formShow={ formShow }>
+		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
 				<Title>my Todos</Title>
 				<Loader isVisible={ loading }/>
