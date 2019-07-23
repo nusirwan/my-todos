@@ -10,6 +10,17 @@ export const leftFadeIn = {
 	},
 };
 
+export const downFadeIn = {
+	exit: {
+		opacity: 0,
+		y: -20,
+	},
+	enter: {
+		opacity: 1,
+		y: 0,
+	},
+};
+
 export const button = {
 	pressable: true,
 	init: { opacity: 1 },
