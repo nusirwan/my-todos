@@ -2,19 +2,11 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
+import { fadeInRight, openForm, button } from '../../base-styles/transitions';
 
 const { breakpoints, colors } = theme;
 
-const HeaderProps = {
-	open: {
-		height: '6.25rem',
-	},
-	closed: {
-		height: '2.5rem',
-	},
-};
-
-export const Header = styled( posed.header( HeaderProps ) )`
+export const Header = styled( posed.header( openForm ) )`
 	display: block;
 `;
 
@@ -24,7 +16,7 @@ export const Wrapper = styled.div`
 	align-items: center;
 `;
 
-export const Title = styled.h1`
+export const Title = styled( posed.h1( fadeInRight ) )`
 	flex-grow: 1;
 	padding-bottom: 0.375rem;
 	font-size: 1.5rem;
@@ -82,7 +74,7 @@ export const Divider = styled.span`
 	background-color: ${ colors.white };
 `
 
-export const Add = styled.button`
+export const Add = styled( posed.button( button ) )`
 	display: flex;
 	align-items: center;
 	padding-left: 0.125em;
@@ -92,18 +84,11 @@ export const Add = styled.button`
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
+	color: ${ colors.sanJuan };
 
 	svg {
 		width: 1.375rem;
 		height: 1.375rem;
-		color: ${ props => props.formShow ? `${ colors.sanJuan }` : `${ colors.silverChalice }` };
-		transition: color 0.1s ease-in;
-	}
-
-	&:hover {
-		svg {
-			color: ${ colors.sanJuan };
-		}
 	}
 
 	&:focus {

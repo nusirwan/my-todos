@@ -26,7 +26,7 @@ const Navigation = props => {
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
-				<Title>my Todos</Title>
+				<Title initialPose="exit" pose="enter">my Todos</Title>
 				<Loader isVisible={ loading }/>
 				<Nav isVisible={ ! loading }>
 					<Select name="todos" onChange={ handleChange }>
@@ -35,10 +35,7 @@ const Navigation = props => {
 						<option value="complete">Complete</option>
 					</Select>
 					<Divider />
-					<Add
-						formShow={ formShow }
-						onClick={ () => setFormShow( ! formShow ) }
-					>
+					<Add onClick={ () => setFormShow( ! formShow ) }>
 						<FiPlusSquare />
 					</Add>
 				</Nav>

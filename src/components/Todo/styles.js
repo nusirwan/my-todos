@@ -2,23 +2,13 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
+import { button, fadeInDown } from '../../base-styles/transitions';
 
 const { colors } = theme;
 
 const TOGGLEWRAP_WIDTH = '6.25rem';
 
-const ListProps = {
-	exit: {
-		opacity: 0,
-		y: -20,
-	},
-	enter: {
-	  opacity: 1,
-	  y: 0,
-	},
-};
-
-export const List = styled( posed.li( ListProps ) )`
+export const List = styled( posed.li( fadeInDown ) )`
 	display: flex;
 	position: relative;
 	margin-top: 1em;
@@ -77,7 +67,7 @@ export const Input = styled.input`
 	}
 `;
 
-const BaseButton = styled.button`
+const BaseButton = styled( posed.button( button ) )`
 	display: flex;
 	justify-content: center;
 	align-items: center;
