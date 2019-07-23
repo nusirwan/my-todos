@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
+import { button } from '../../base-styles/transitions';
 
 const { colors } = theme;
 
@@ -77,7 +78,7 @@ export const Input = styled.input`
 	}
 `;
 
-const BaseButton = styled.button`
+const BaseButton = styled( posed.button( button ) )`
 	display: flex;
 	justify-content: center;
 	align-items: center;
