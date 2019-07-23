@@ -12,8 +12,8 @@ export const leftFadeIn = {
 
 export const button = {
 	pressable: true,
-	init: { scale: 1 },
-	press: { scale: 0.94 },
+	init: { opacity: 1 },
+	press: { opacity: 0.8 },
 };
 
 export const openForm = {
