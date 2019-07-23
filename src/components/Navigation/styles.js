@@ -2,16 +2,9 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
+import { leftFadeIn, openForm, button } from '../../base-styles/transitions';
 
-const {
-	breakpoints,
-	colors,
-	transitions: {
-		leftFadeIn,
-		openForm,
-		button,
-	},
-} = theme;
+const { breakpoints, colors } = theme;
 
 export const Header = styled( posed.header( openForm ) )`
 	display: block;
