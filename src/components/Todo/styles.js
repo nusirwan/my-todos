@@ -2,24 +2,13 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
-import { button } from '../../base-styles/transitions';
+import { button, downFadeIn } from '../../base-styles/transitions';
 
 const { colors } = theme;
 
 const TOGGLEWRAP_WIDTH = '6.25rem';
 
-const ListProps = {
-	exit: {
-		opacity: 0,
-		y: -20,
-	},
-	enter: {
-	  opacity: 1,
-	  y: 0,
-	},
-};
-
-export const List = styled( posed.li( ListProps ) )`
+export const List = styled( posed.li( downFadeIn ) )`
 	display: flex;
 	position: relative;
 	margin-top: 1em;
