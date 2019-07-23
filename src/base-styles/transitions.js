@@ -1,4 +1,4 @@
-export const leftFadeIn = {
+export const fadeInRight = {
 	exit: {
 		opacity: 0,
 		x: 4,
@@ -10,7 +10,7 @@ export const leftFadeIn = {
 	},
 };
 
-export const downFadeIn = {
+export const fadeInDown = {
 	exit: {
 		opacity: 0,
 		y: -20,

@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
-import { button, downFadeIn } from '../../base-styles/transitions';
+import { button, fadeInDown } from '../../base-styles/transitions';
 
 const { colors } = theme;
 
 const TOGGLEWRAP_WIDTH = '6.25rem';
 
-export const List = styled( posed.li( downFadeIn ) )`
+export const List = styled( posed.li( fadeInDown ) )`
 	display: flex;
 	position: relative;
 	margin-top: 1em;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
-import { leftFadeIn, openForm, button } from '../../base-styles/transitions';
+import { fadeInRight, openForm, button } from '../../base-styles/transitions';
 
 const { breakpoints, colors } = theme;
 
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 	align-items: center;
 `;
 
-export const Title = styled( posed.h1( leftFadeIn ) )`
+export const Title = styled( posed.h1( fadeInRight ) )`
 	flex-grow: 1;
 	padding-bottom: 0.375rem;
 	font-size: 1.5rem;
