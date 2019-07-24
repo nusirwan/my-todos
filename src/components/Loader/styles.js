@@ -6,6 +6,8 @@ const { colors } = theme;
 
 export const Wrapper = styled.div`
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-top: 0.25rem;
 	visibility: hidden;
 	opacity: 0;

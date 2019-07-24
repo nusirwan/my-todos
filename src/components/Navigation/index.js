@@ -27,7 +27,11 @@ const Navigation = props => {
 		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
 				<Title initialPose="exit" pose="enter">my Todos</Title>
-				<Loader isVisible={ loading }/>
+				<Loader
+					isVisible={ loading }
+					title="Loading..."
+					type="Ball-Triangle"
+				/>
 				<Nav isVisible={ ! loading }>
 					<Select name="todos" onChange={ handleChange }>
 						<option value="all" defaultValue>All</option>
