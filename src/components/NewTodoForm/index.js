@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FiCornerRightDown } from 'react-icons/fi';
 
 import { Form, Input, Submit } from './styles';
@@ -36,5 +37,10 @@ const NewTodoForm = props => {
 		</Form>
 	)
 }
+
+NewTodoForm.propTypes = {
+	addTodo: PropTypes.func.isRequired,
+	isVisible: PropTypes.bool.isRequired,
+};
 
 export default NewTodoForm;

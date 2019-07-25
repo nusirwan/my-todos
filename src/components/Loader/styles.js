@@ -5,15 +5,13 @@ import theme from '../../base-styles/theme';
 const { colors } = theme;
 
 export const Wrapper = styled.div`
-	display: flex;
-	margin-top: 0.25rem;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0.1s, opacity 0.5s;
+	display: none;
 
 	${ props => props.isVisible && css`
-		visibility: visible;
-		opacity: 1;
+		display: flex;
+		justify-content: center;
+		margin-top: 0.25rem;
+		align-items: center;
 	`}
 `;
 

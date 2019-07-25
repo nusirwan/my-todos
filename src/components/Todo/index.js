@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import {
 	FiCheckSquare,
 	FiMoreVertical,
@@ -27,9 +28,9 @@ const Todo = props => {
 	const [ visible, setVisible ] = useState( false );
 	const toggleWrapRef = useRef();
 	const {
-		toggleCompletion,
 		handleRemove,
 		id,
+		toggleCompletion,
 		updateTodo,
 	} = props;
 
@@ -53,10 +54,6 @@ const Todo = props => {
 		)
 		setCompleted( ! completed );
 	};
-
-	const handleMoreNav = () => {
-		setVisible( ! visible )
-	}
 
 	useOutsideClick( toggleWrapRef, () => {
 		if ( visible ) {
@@ -92,7 +89,7 @@ const Todo = props => {
 						</Task>
 					)
 				}
-				<More onClick={ handleMoreNav }>
+				<More onClick={ () => setVisible( ! visible ) }>
 					<FiMoreVertical />
 				</More>
 			</TaskWrap>
@@ -111,6 +108,15 @@ const Todo = props => {
 			</ToggleWrap>
 		</List>
 	)
+}
+
+Todo.propTypes = {
+	completed: PropTypes.bool.isRequired,
+	handleRemove: PropTypes.func.isRequired,
+	id: PropTypes.string.isRequired,
+	task: PropTypes.string.isRequired,
+	toggleCompletion: PropTypes.func.isRequired,
+	updateTodo: PropTypes.func.isRequired,
 }
 
 export default Todo;
