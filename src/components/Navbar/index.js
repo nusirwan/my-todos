@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 import Loader from '../Loader';
-import NewTodoForm from '../NewTodoForm';
+import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
 
 import {

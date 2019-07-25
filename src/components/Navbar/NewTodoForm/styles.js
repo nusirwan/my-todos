@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import theme from '../../base-styles/theme';
+import theme from '../../../base-styles/theme';
 
 const { colors } = theme;
 
