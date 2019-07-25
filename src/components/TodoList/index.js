@@ -180,7 +180,7 @@ class TodoList extends Component {
 					formShow={ formShow }
 					headerTitle="my Todos"
 					loading={ loading }
-					loaderTitle="Loading..."
+					loaderText="Loading..."
 					loaderType="Ball-Triangle"
 					toggleFormShow={ toggleFormShow }
 				/>
