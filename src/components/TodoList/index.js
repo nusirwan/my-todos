@@ -13,6 +13,7 @@ import {
 class TodoList extends Component {
 	state = {
 		error: false,
+		formShow: false,
 		loading: true,
 		todos: [],
 		todoToShow: 'all',
@@ -135,12 +136,24 @@ class TodoList extends Component {
 		} )
 	}
 
+	toggleFormShow = () => {
+		this.setState( prevState => ( {
+			formShow: ! prevState.formShow,
+		} ) )
+	}
+
 	render() {
 		const {
 			add,
 			remove,
-			state: { error, loading, todoToShow  },
+			state: {
+				error,
+				formShow,
+				loading,
+				todoToShow,
+			},
 			toggleCompletion,
+			toggleFormShow,
 			updateTodoToShow,
 			update,
 		} = this;
@@ -164,7 +177,12 @@ class TodoList extends Component {
 				<Navigation
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
+					formShow={ formShow }
+					headerTitle="my Todos"
 					loading={ loading }
+					loaderTitle="Loading..."
+					loaderType="Ball-Triangle"
+					toggleFormShow={ toggleFormShow }
 				/>
 				{
 					error
