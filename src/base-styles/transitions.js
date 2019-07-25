@@ -1,3 +1,14 @@
+export const fadeIn = {
+	exit: {
+		opacity: 0,
+		display: 'none',
+	},
+	enter: {
+		opacity: 1,
+		display: 'flex',
+	},
+};
+
 export const fadeInRight = {
 	exit: {
 		opacity: 0,
