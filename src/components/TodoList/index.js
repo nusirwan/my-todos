@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import axios from '../../axios'
-import Navigation from '../Navigation';
+import Navbar from '../Navbar';
 import Todo from '../Todo';
 
 import {
@@ -174,7 +174,7 @@ class TodoList extends Component {
 
 		return (
 			<Wraper>
-				<Navigation
+				<Navbar
 					addTodo={ add }
 					filterTodo={ updateTodoToShow }
 					formShow={ formShow }

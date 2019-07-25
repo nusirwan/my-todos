@@ -15,7 +15,7 @@ import {
 	Wrapper,
 } from './styles';
 
-const Navigation = props => {
+const Navbar = props => {
 	const {
 		addTodo,
 		filterTodo,
@@ -56,7 +56,7 @@ const Navigation = props => {
 	)
 }
 
-Navigation.propTypes = {
+Navbar.propTypes = {
 	addTodo: PropTypes.func.isRequired,
 	filterTodo: PropTypes.func.isRequired,
 	formShow: PropTypes.bool.isRequired,
@@ -67,4 +67,4 @@ Navigation.propTypes = {
 	toggleFormShow: PropTypes.func.isRequired,
 }
 
-export default Navigation;
+export default Navbar;
