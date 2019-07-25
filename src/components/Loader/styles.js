@@ -1,18 +1,15 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
+import { fadeIn } from '../../base-styles/transitions';
 
 const { colors } = theme;
 
-export const Wrapper = styled.div`
-	display: none;
-
-	${ props => props.isVisible && css`
-		display: flex;
-		justify-content: center;
-		margin-top: 0.25rem;
-		align-items: center;
-	`}
+export const Wrapper = styled( posed.div( fadeIn ) )`
+	justify-content: center;
+	margin-top: 0.25rem;
+	align-items: center;
 `;
 
 export const Title = styled.span`

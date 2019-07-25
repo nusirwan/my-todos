@@ -15,7 +15,7 @@ const Loader = props => {
 	} = props;
 
 	return (
-		<Wrapper isVisible={ isVisible }>
+		<Wrapper pose={ isVisible ? 'enter' : 'exit' }>
 			<Spinner
 				color={ color }
 				height={ height }
