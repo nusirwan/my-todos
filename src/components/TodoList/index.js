@@ -5,7 +5,7 @@ import Navbar from '../Navbar';
 import Todo from '../Todo';
 
 import {
-	ErrorTitle,
+	ErrorText,
 	Todos,
 	Wraper,
 } from './styles';
@@ -184,24 +184,23 @@ class TodoList extends Component {
 					loaderType="Ball-Triangle"
 					toggleFormShow={ toggleFormShow }
 				/>
-				{
-					error
-						? <ErrorTitle>Ops... Internal Server Error!</ErrorTitle>
-						: (
-							<Todos>
-								{ todos.map( todo => (
-									<Todo
-										key={ todo.id }
-										id={ todo.id }
-										completed={ todo.completed }
-										task={ todo.task }
-										toggleCompletion={ toggleCompletion }
-										toggleRemove={ remove }
-										updateTodo={ update }
-									/>
-								) ) }
-							</Todos>
-						)
+				{ error
+					? <ErrorText>Ops... Internal Server Error!</ErrorText>
+					: (
+						<Todos>
+							{ todos.map( todo => (
+								<Todo
+									key={ todo.id }
+									id={ todo.id }
+									completed={ todo.completed }
+									task={ todo.task }
+									toggleCompletion={ toggleCompletion }
+									toggleRemove={ remove }
+									updateTodo={ update }
+								/>
+							) ) }
+						</Todos>
+					)
 				}
 			</Wraper>
 		);

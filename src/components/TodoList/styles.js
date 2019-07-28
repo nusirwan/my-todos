@@ -15,7 +15,7 @@ export const Wraper = styled.div`
 	}
 `;
 
-export const ErrorTitle = styled.h2`
+export const ErrorText = styled.h2`
 	margin-top: 4rem;
 	text-align: center;
 	font-size: 1rem;
