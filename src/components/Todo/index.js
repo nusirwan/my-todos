@@ -1,24 +1,17 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import {
-	FiCheckSquare,
-	FiMoreVertical,
-	FiSquare,
-	FiX,
-} from 'react-icons/fi';
+import { FiMoreVertical } from 'react-icons/fi';
 
 import useOutsideClick from '../../utilities/useOutsideClick'
+import Toggles from './Toggles'
 
 import {
-	Check,
 	Input,
 	Form,
 	List,
 	More,
-	Remove,
 	Task,
 	TaskWrap,
-	ToggleWrap,
 } from './styles';
 
 const Todo = props => {
@@ -28,9 +21,9 @@ const Todo = props => {
 	const [ visible, setVisible ] = useState( false );
 	const toggleWrapRef = useRef();
 	const {
-		handleRemove,
 		id,
 		toggleCompletion,
+		toggleRemove,
 		updateTodo,
 	} = props;
 
@@ -93,29 +86,23 @@ const Todo = props => {
 					<FiMoreVertical />
 				</More>
 			</TaskWrap>
-			<ToggleWrap ref={ toggleWrapRef }>
-				<Check
-					completed={ completed }
-					isVisible={ completed }
-					onClick={ handleCompletion }
-				>
-					<FiCheckSquare />
-					<FiSquare />
-				</Check>
-				<Remove onClick={ () => handleRemove( id ) }>
-					<FiX />
-				</Remove>
-			</ToggleWrap>
+			<Toggles
+				toggleWrapRef={ toggleWrapRef }
+				completed={ completed }
+				isVisible={ completed }
+				toggleCompletion={ handleCompletion }
+				toggleRemove={ () => toggleRemove( id ) }
+			/>
 		</List>
 	)
 }
 
 Todo.propTypes = {
 	completed: PropTypes.bool.isRequired,
-	handleRemove: PropTypes.func.isRequired,
 	id: PropTypes.string.isRequired,
 	task: PropTypes.string.isRequired,
 	toggleCompletion: PropTypes.func.isRequired,
+	toggleRemove: PropTypes.func.isRequired,
 	updateTodo: PropTypes.func.isRequired,
 }
 
