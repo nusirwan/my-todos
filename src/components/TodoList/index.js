@@ -130,7 +130,7 @@ class TodoList extends Component {
 			} )
 	}
 
-	updateTodoToShow = filter => {
+	filterTodoToShow = filter => {
 		this.setState( {
 			todoToShow: filter,
 		} )
@@ -154,7 +154,7 @@ class TodoList extends Component {
 			},
 			toggleCompletion,
 			toggleFormShow,
-			updateTodoToShow,
+			filterTodoToShow,
 			update,
 		} = this;
 
@@ -176,7 +176,7 @@ class TodoList extends Component {
 			<Wraper>
 				<Navbar
 					addTodo={ add }
-					filterTodo={ updateTodoToShow }
+					filterTodo={ filterTodoToShow }
 					formShow={ formShow }
 					headerTitle="my Todos"
 					loading={ loading }
@@ -194,9 +194,9 @@ class TodoList extends Component {
 										key={ todo.id }
 										id={ todo.id }
 										completed={ todo.completed }
+										task={ todo.task }
 										toggleCompletion={ toggleCompletion }
 										toggleRemove={ remove }
-										task={ todo.task }
 										updateTodo={ update }
 									/>
 								) ) }
