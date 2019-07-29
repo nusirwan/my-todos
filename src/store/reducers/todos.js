@@ -36,7 +36,7 @@ const items = ( state = initialState, action ) => {
 					todo => ( todo.id === action.payload.id )
 						? {
 							...todo,
-							completed: ! todo.completed,
+							completed: action.payload.completed,
 						}
 						: todo
 				),

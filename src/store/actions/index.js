@@ -33,7 +33,7 @@ export const editTodosCompletion = ( id, completed ) => {
 	return dispatch => {
 		axios.put( `/mytodos/${ id }`, { completed: ! completed } )
 			.then( response => {
-				dispatch( toggleCompletion( response.data ) )
+				dispatch( toggleCompletion( response.data.id, response.data.completed ) )
 			} )
 			.catch( error => {
 				// eslint-disable-next-line no-console
@@ -42,7 +42,10 @@ export const editTodosCompletion = ( id, completed ) => {
 	}
 }
 
-export const toggleCompletion = id => ( {
+export const toggleCompletion = ( id, completed ) => ( {
 	type: 'TOGGLE_COMPLETION',
-	payload: { id },
+	payload: {
+		id,
+		completed,
+	},
 } )
