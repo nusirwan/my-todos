@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTodos } from '../../store/actions';
+import { fetchTodos, editTodosCompletion } from '../../store/actions';
 
 import Todo from '../Todo';
 
@@ -12,6 +12,7 @@ class TodoList extends Component {
 	}
 
 	render() {
+		const { dispatch } = this.props;
 
 		return (
 			<Wraper>
@@ -22,7 +23,9 @@ class TodoList extends Component {
 							id={ todo.id }
 							completed={ todo.completed }
 							task={ todo.task }
-							// toggleCompletion={ toggleCompletion }
+							toggleCompletion={ () => dispatch(
+								editTodosCompletion( todo.id, todo.completed )
+							) }
 							// toggleRemove={ remove }
 							// updateTodo={ update }
 						/>
