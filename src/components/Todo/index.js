@@ -103,7 +103,7 @@ Todo.propTypes = {
 	task: PropTypes.string.isRequired,
 	toggleCompletion: PropTypes.func.isRequired,
 	toggleRemove: PropTypes.func.isRequired,
-	updateTodo: PropTypes.func.isRequired,
+	// updateTodo: PropTypes.func.isRequired,
 }
 
 export default Todo;
