@@ -5,6 +5,7 @@ import {
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
 	TOGGLE_COMPLETION,
+	TOGGLE_REMOVE,
 } from '../reducers/todos';
 
 export const fetchTodos = () => {
@@ -58,4 +59,25 @@ export const toggleCompletion = ( id, completed ) => ( {
 		id,
 		completed,
 	},
+} )
+
+export const handleRemove = id => {
+	// redux thunk
+	return dispatch => {
+		axios
+			.delete( `/mytodos/${ id }` )
+			.then( response => {
+				const { id } = response.data;
+				dispatch( toggleRemove( id ) )
+			} )
+			.catch( error => {
+				// eslint-disable-next-line no-console
+				console.log( error );
+			} )
+	}
+}
+
+export const toggleRemove = id => ( {
+	type: TOGGLE_REMOVE,
+	payload: { id },
 } )
