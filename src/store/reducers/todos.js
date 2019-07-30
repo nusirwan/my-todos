@@ -9,6 +9,7 @@ export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
 export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
 export const TOGGLE_COMPLETION = 'TOGGLE_COMPLETION';
 export const TOGGLE_REMOVE = 'TOGGLE_REMOVE';
+export const UPDATE_TASK = 'UPDATE_TASK';
 
 const items = ( state = initialState, action ) => {
 	switch ( action.type ) {
@@ -60,6 +61,23 @@ const items = ( state = initialState, action ) => {
 				...state,
 				todos: todos.filter(
 					todo => todo.id !== id
+				),
+			}
+		}
+
+		case UPDATE_TASK: {
+			const { todos } = state;
+			const { id, task } = action.payload;
+
+			return {
+				...state,
+				todos: todos.map(
+					todo => ( todo.id === id )
+						? {
+							...todo,
+							task: task,
+						}
+						: todo
 				),
 			}
 		}

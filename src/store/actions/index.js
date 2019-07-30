@@ -6,6 +6,7 @@ import {
 	INITIAL_DATA_FAILED,
 	TOGGLE_COMPLETION,
 	TOGGLE_REMOVE,
+	UPDATE_TASK,
 } from '../reducers/todos';
 
 export const fetchTodos = () => {
@@ -84,4 +85,30 @@ export const handleRemove = id => {
 export const toggleRemove = id => ( {
 	type: TOGGLE_REMOVE,
 	payload: { id },
+} )
+
+export const handleEdit = ( id, updatedTask ) => {
+	// redux thunk
+	return dispatch => {
+		dispatch( initDataStarted() )
+
+		axios
+			.put( `/mytodos/${ id }`, { task: updatedTask } )
+			.then( response => {
+				const { id, task } = response.data;
+				dispatch( updateTask( id, task ) )
+			} )
+			.catch( error => {
+				// eslint-disable-next-line no-console
+				console.log( error );
+			} )
+	}
+}
+
+export const updateTask = ( id, task ) => ( {
+	type: UPDATE_TASK,
+	payload: {
+		id,
+		task,
+	},
 } )
