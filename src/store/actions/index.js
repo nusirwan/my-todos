@@ -40,6 +40,8 @@ const initDataFailed = () => ( {
 export const editTodosCompletion = ( id, completed ) => {
 	// redux thunk
 	return dispatch => {
+		dispatch( initDataStarted() )
+
 		axios
 			.put( `/mytodos/${ id }`, { completed: ! completed } )
 			.then( response => {
@@ -64,6 +66,8 @@ export const toggleCompletion = ( id, completed ) => ( {
 export const handleRemove = id => {
 	// redux thunk
 	return dispatch => {
+		dispatch( initDataStarted() )
+
 		axios
 			.delete( `/mytodos/${ id }` )
 			.then( response => {
