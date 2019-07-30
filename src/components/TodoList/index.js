@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTodos, editTodosCompletion } from '../../store/actions';
+import { fetchTodos, editTodosCompletion, handleRemove } from '../../store/actions';
 
 import Todo from '../Todo';
 
@@ -26,7 +26,9 @@ class TodoList extends Component {
 							toggleCompletion={ () => dispatch(
 								editTodosCompletion( todo.id, todo.completed )
 							) }
-							// toggleRemove={ remove }
+							toggleRemove={ () => dispatch(
+								handleRemove( todo.id )
+							) }
 							// updateTodo={ update }
 						/>
 					) ) }
