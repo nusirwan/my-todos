@@ -1,5 +1,12 @@
 import axios from '../../axios'
 
+import {
+	INITIAL_DATA_STARTED,
+	INITIAL_DATA_REQUEST,
+	INITIAL_DATA_FAILED,
+	TOGGLE_COMPLETION,
+} from '../reducers/todos';
+
 export const fetchTodos = () => {
 	// redux thunk
 	return dispatch => {
@@ -16,16 +23,16 @@ export const fetchTodos = () => {
 }
 
 const initDataStarted = () => ( {
-	type: 'INITIAL_DATA_STARTED',
+	type: INITIAL_DATA_STARTED,
 } )
 
 const initData = todos => ( {
-	type: 'INITIAL_DATA',
+	type: INITIAL_DATA_REQUEST,
 	payload: { todos },
 } )
 
 const initDataFailed = () => ( {
-	type: 'INITIAL_DATA_FAILED',
+	type: INITIAL_DATA_FAILED,
 } )
 
 export const editTodosCompletion = ( id, completed ) => {
@@ -43,7 +50,7 @@ export const editTodosCompletion = ( id, completed ) => {
 }
 
 export const toggleCompletion = ( id, completed ) => ( {
-	type: 'TOGGLE_COMPLETION',
+	type: TOGGLE_COMPLETION,
 	payload: {
 		id,
 		completed,

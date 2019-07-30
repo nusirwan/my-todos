@@ -4,15 +4,20 @@ let initialState = {
 	todos: [],
 };
 
+export const INITIAL_DATA_STARTED = 'INITIAL_DATA_STARTED';
+export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
+export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
+export const TOGGLE_COMPLETION = 'TOGGLE_COMPLETION';
+
 const items = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case 'INITIAL_DATA_STARTED':
+		case INITIAL_DATA_STARTED:
 			return {
 				...state,
 				loading: true,
 			}
 
-		case 'INITIAL_DATA':
+		case INITIAL_DATA_REQUEST:
 			return {
 				...state,
 				loading: false,
@@ -22,14 +27,14 @@ const items = ( state = initialState, action ) => {
 				],
 			}
 
-		case 'INITIAL_DATA_FAILED':
+		case INITIAL_DATA_FAILED:
 			return {
 				...state,
 				loading: false,
 				error: true,
 			}
 
-		case 'TOGGLE_COMPLETION':
+		case TOGGLE_COMPLETION:
 			return {
 				...state,
 				todos: state.todos.map(
