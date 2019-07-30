@@ -12,7 +12,8 @@ export const fetchTodos = () => {
 	return dispatch => {
 		dispatch( initDataStarted() )
 
-		axios.get( '/mytodos' )
+		axios
+			.get( '/mytodos' )
 			.then( response => {
 				dispatch( initData( response.data ) )
 			} )
@@ -38,9 +39,11 @@ const initDataFailed = () => ( {
 export const editTodosCompletion = ( id, completed ) => {
 	// redux thunk
 	return dispatch => {
-		axios.put( `/mytodos/${ id }`, { completed: ! completed } )
+		axios
+			.put( `/mytodos/${ id }`, { completed: ! completed } )
 			.then( response => {
-				dispatch( toggleCompletion( response.data.id, response.data.completed ) )
+				const { id, completed } = response.data;
+				dispatch( toggleCompletion( id, completed ) )
 			} )
 			.catch( error => {
 				// eslint-disable-next-line no-console

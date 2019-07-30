@@ -12,12 +12,12 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { dispatch } = this.props;
+		const { dispatch, todos } = this.props;
 
 		return (
 			<Wraper>
 				<Todos>
-					{ this.props.todos.map( todo => (
+					{ todos.map( todo => (
 						<Todo
 							key={ todo.id }
 							id={ todo.id }

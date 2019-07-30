@@ -34,18 +34,22 @@ const items = ( state = initialState, action ) => {
 				error: true,
 			}
 
-		case TOGGLE_COMPLETION:
+		case TOGGLE_COMPLETION: {
+			const { todos } = state;
+			const { id, completed } = action.payload;
+
 			return {
 				...state,
-				todos: state.todos.map(
-					todo => ( todo.id === action.payload.id )
+				todos: todos.map(
+					todo => ( todo.id === id )
 						? {
 							...todo,
-							completed: action.payload.completed,
+							completed: completed,
 						}
 						: todo
 				),
 			}
+		}
 
 		default:
 			return state;
