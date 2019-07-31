@@ -9,7 +9,7 @@ import {
 
 import Todo from '../Todo';
 
-import { Todos, Wraper } from './styles';
+import { Todos } from './styles';
 
 class TodoList extends Component {
 	componentDidMount() {
@@ -39,21 +39,19 @@ class TodoList extends Component {
 		const { remove, toggleCompletion, update } = this;
 
 		return (
-			<Wraper>
-				<Todos>
-					{ todos.map( todo => (
-						<Todo
-							key={ todo.id }
-							id={ todo.id }
-							completed={ todo.completed }
-							task={ todo.task }
-							toggleCompletion={ toggleCompletion }
-							toggleRemove={ remove }
-							updateTodo={ update }
-						/>
-					) ) }
-				</Todos>
-			</Wraper>
+			<Todos>
+				{ todos.map( todo => (
+					<Todo
+						key={ todo.id }
+						id={ todo.id }
+						completed={ todo.completed }
+						task={ todo.task }
+						toggleCompletion={ toggleCompletion }
+						toggleRemove={ remove }
+						updateTodo={ update }
+					/>
+				) ) }
+			</Todos>
 		);
 	}
 }
