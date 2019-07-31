@@ -38,7 +38,7 @@ const initDataFailed = () => ( {
 	type: INITIAL_DATA_FAILED,
 } )
 
-export const editTodosCompletion = ( id, completed ) => {
+export const editCompletion = ( id, completed ) => {
 	// redux thunk
 	return dispatch => {
 		dispatch( initDataStarted() )
