@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
+import { toggleButton } from '../../store/actions';
 
 import {
 	Header,
@@ -14,10 +15,10 @@ import {
 const Navbar = props => {
 	const {
 		addTodo,
+		dispatch,
 		filterTodo,
 		formShow,
 		loading,
-		toggleFormShow,
 	} = props;
 
 	return (
@@ -32,7 +33,7 @@ const Navbar = props => {
 				<Navigation
 					isVisible={ ! loading }
 					filterTodo={ filterTodo }
-					onClick={ toggleFormShow }
+					onClick={ () => dispatch( toggleButton() ) }
 				/>
 			</Wrapper>
 			<NewTodoForm addTodo={ addTodo } isVisible={ formShow } />
@@ -41,6 +42,7 @@ const Navbar = props => {
 }
 
 const mapStateToProps = state => ( {
+	formShow: state.formShow,
 	loading: state.loading,
 } );
 
