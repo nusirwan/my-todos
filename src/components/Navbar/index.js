@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
@@ -16,21 +16,18 @@ const Navbar = props => {
 		addTodo,
 		filterTodo,
 		formShow,
-		headerTitle,
 		loading,
-		loaderText,
-		loaderType,
 		toggleFormShow,
 	} = props;
 
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
-				<Title initialPose="exit" pose="enter">{ headerTitle }</Title>
+				<Title initialPose="exit" pose="enter">my_Todos</Title>
 				<Loader
 					isVisible={ loading }
-					title={ loaderText }
-					type={ loaderType }
+					title="Loading..."
+					type="Ball-Triangle"
 				/>
 				<Navigation
 					isVisible={ ! loading }
@@ -43,15 +40,8 @@ const Navbar = props => {
 	)
 }
 
-Navbar.propTypes = {
-	addTodo: PropTypes.func.isRequired,
-	filterTodo: PropTypes.func.isRequired,
-	formShow: PropTypes.bool.isRequired,
-	headerTitle: PropTypes.string.isRequired,
-	loading: PropTypes.bool.isRequired,
-	loaderText: PropTypes.string,
-	loaderType: PropTypes.string,
-	toggleFormShow: PropTypes.func.isRequired,
-}
+const mapStateToProps = state => ( {
+	loading: state.loading,
+} );
 
-export default Navbar;
+export default connect( mapStateToProps )( Navbar );
