@@ -4,6 +4,7 @@ import {
 	INITIAL_DATA_STARTED,
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
+	TOGGLE_BUTTON,
 	TOGGLE_COMPLETION,
 	TOGGLE_REMOVE,
 	UPDATE_TASK,
@@ -111,4 +112,9 @@ export const updateTask = ( id, task ) => ( {
 		id,
 		task,
 	},
+} )
+
+// TODO: split into ui action
+export const toggleButton = () => ( {
+	type: TOGGLE_BUTTON,
 } )
