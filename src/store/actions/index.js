@@ -57,7 +57,7 @@ export const editCompletion = ( id, completed ) => {
 	}
 }
 
-export const toggleCompletion = ( id, completed ) => ( {
+const toggleCompletion = ( id, completed ) => ( {
 	type: TOGGLE_COMPLETION,
 	payload: {
 		id,
@@ -83,7 +83,7 @@ export const handleRemove = id => {
 	}
 }
 
-export const toggleRemove = id => ( {
+const toggleRemove = id => ( {
 	type: TOGGLE_REMOVE,
 	payload: { id },
 } )
@@ -106,7 +106,7 @@ export const handleEdit = ( id, updatedTask ) => {
 	}
 }
 
-export const updateTask = ( id, task ) => ( {
+const updateTask = ( id, task ) => ( {
 	type: UPDATE_TASK,
 	payload: {
 		id,
