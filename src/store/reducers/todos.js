@@ -1,5 +1,6 @@
 let initialState = {
 	error: false,
+	formShow: false,
 	loading: true,
 	todos: [],
 };
@@ -7,6 +8,7 @@ let initialState = {
 export const INITIAL_DATA_STARTED = 'INITIAL_DATA_STARTED';
 export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
 export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
+export const TOGGLE_BUTTON = 'TOGGLE_BUTTON';
 export const TOGGLE_COMPLETION = 'TOGGLE_COMPLETION';
 export const TOGGLE_REMOVE = 'TOGGLE_REMOVE';
 export const UPDATE_TASK = 'UPDATE_TASK';
@@ -42,6 +44,7 @@ const items = ( state = initialState, action ) => {
 
 			return {
 				...state,
+				loading: false,
 				todos: todos.map(
 					todo => ( todo.id === id )
 						? {
@@ -59,6 +62,7 @@ const items = ( state = initialState, action ) => {
 
 			return {
 				...state,
+				loading: false,
 				todos: todos.filter(
 					todo => todo.id !== id
 				),
@@ -71,6 +75,7 @@ const items = ( state = initialState, action ) => {
 
 			return {
 				...state,
+				loading: false,
 				todos: todos.map(
 					todo => ( todo.id === id )
 						? {
@@ -81,6 +86,13 @@ const items = ( state = initialState, action ) => {
 				),
 			}
 		}
+
+		// TODO: split into ui reducer
+		case TOGGLE_BUTTON:
+			return {
+				...state,
+				formShow: ! state.formShow,
+			}
 
 		default:
 			return state;
