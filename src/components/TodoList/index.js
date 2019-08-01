@@ -63,9 +63,22 @@ class TodoList extends Component {
 	}
 }
 
+const getTodos = ( todos, filter ) => {
+	switch ( filter ) {
+		case 'ALL':
+			return todos;
+		case 'ACTIVE':
+			return todos.filter( todo => ! todo.completed );
+		case 'COMPLETED':
+			return todos.filter( todo => todo.completed );
+		default:
+			return todos;
+	}
+}
+
 const mapStateToProps = state => ( {
 	error: state.error,
-	todos: state.todos,
+	todos: getTodos( state.todos, state.filterTodos ),
 } );
 
 export default connect( mapStateToProps )( TodoList );
