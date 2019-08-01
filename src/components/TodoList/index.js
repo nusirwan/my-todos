@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
 	fetchTodos,
-	editCompletion,
-	handleRemove,
-	handleEdit,
+	handleEditCompletionTodo,
+	handleRemoveTodo,
+	handleEditTaskTodo,
 } from '../../store/actions';
 
 import Todo from '../Todo';
@@ -18,19 +18,19 @@ class TodoList extends Component {
 
 	update = ( id, updateTask ) => {
 		this.props.dispatch(
-			handleEdit( id, updateTask )
+			handleEditTaskTodo( id, updateTask )
 		);
 	}
 
 	remove = id => {
 		this.props.dispatch(
-			handleRemove( id )
+			handleRemoveTodo( id )
 		);
 	}
 
 	toggleCompletion = ( id, completed ) => {
 		this.props.dispatch(
-			editCompletion( id, completed )
+			handleEditCompletionTodo( id, completed )
 		);
 	}
 

@@ -9,19 +9,19 @@ export const INITIAL_DATA_STARTED = 'INITIAL_DATA_STARTED';
 export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
 export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
 export const TOGGLE_BUTTON = 'TOGGLE_BUTTON';
-export const TOGGLE_COMPLETION = 'TOGGLE_COMPLETION';
-export const TOGGLE_REMOVE = 'TOGGLE_REMOVE';
-export const UPDATE_TASK = 'UPDATE_TASK';
+export const EDIT_COMPLETION_TODO = 'EDIT_COMPLETION_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const EDIT_TASK_TODO = 'EDIT_TASK_TODO';
 
 const items = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case INITIAL_DATA_STARTED:
+		case INITIAL_DATA_STARTED :
 			return {
 				...state,
 				loading: true,
 			}
 
-		case INITIAL_DATA_REQUEST:
+		case INITIAL_DATA_REQUEST :
 			return {
 				...state,
 				loading: false,
@@ -31,14 +31,14 @@ const items = ( state = initialState, action ) => {
 				],
 			}
 
-		case INITIAL_DATA_FAILED:
+		case INITIAL_DATA_FAILED :
 			return {
 				...state,
 				loading: false,
 				error: true,
 			}
 
-		case TOGGLE_COMPLETION: {
+		case EDIT_COMPLETION_TODO : {
 			const { todos } = state;
 			const { id, completed } = action.payload;
 
@@ -56,7 +56,7 @@ const items = ( state = initialState, action ) => {
 			}
 		}
 
-		case TOGGLE_REMOVE: {
+		case REMOVE_TODO : {
 			const { todos } = state;
 			const { id } = action.payload;
 
@@ -69,7 +69,7 @@ const items = ( state = initialState, action ) => {
 			}
 		}
 
-		case UPDATE_TASK: {
+		case EDIT_TASK_TODO : {
 			const { todos } = state;
 			const { id, task } = action.payload;
 

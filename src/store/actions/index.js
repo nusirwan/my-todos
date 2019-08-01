@@ -5,9 +5,9 @@ import {
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
 	TOGGLE_BUTTON,
-	TOGGLE_COMPLETION,
-	TOGGLE_REMOVE,
-	UPDATE_TASK,
+	EDIT_COMPLETION_TODO,
+	REMOVE_TODO,
+	EDIT_TASK_TODO,
 } from '../reducers/todos';
 
 export const fetchTodos = () => {
@@ -18,7 +18,7 @@ export const fetchTodos = () => {
 		await axios
 			.get( '/mytodos' )
 			.then( response => {
-				dispatch( initData( response.data ) )
+				dispatch( initDataRequest( response.data ) )
 			} )
 			.catch( error => {
 				dispatch( initDataFailed( error ) )
@@ -30,7 +30,7 @@ const initDataStarted = () => ( {
 	type: INITIAL_DATA_STARTED,
 } )
 
-const initData = todos => ( {
+const initDataRequest = todos => ( {
 	type: INITIAL_DATA_REQUEST,
 	payload: { todos },
 } )
@@ -39,7 +39,7 @@ const initDataFailed = () => ( {
 	type: INITIAL_DATA_FAILED,
 } )
 
-export const editCompletion = ( id, completed ) => {
+export const handleEditCompletionTodo = ( id, completed ) => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
@@ -49,7 +49,7 @@ export const editCompletion = ( id, completed ) => {
 				completed: ! completed,
 			} )
 			.then( response => {
-				dispatch( toggleCompletion( response.data ) )
+				dispatch( editCompletionTodo( response.data ) )
 			} )
 			.catch( error => {
 				dispatch( initDataFailed( error ) )
@@ -57,15 +57,15 @@ export const editCompletion = ( id, completed ) => {
 	}
 }
 
-const toggleCompletion = result => ( {
-	type: TOGGLE_COMPLETION,
+const editCompletionTodo = result => ( {
+	type: EDIT_COMPLETION_TODO,
 	payload: {
 		id: result.id,
 		completed: result.completed,
 	},
 } )
 
-export const handleRemove = id => {
+export const handleRemoveTodo = id => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
@@ -73,7 +73,7 @@ export const handleRemove = id => {
 		await axios
 			.delete( `/mytodos/${ id }` )
 			.then( response => {
-				dispatch( toggleRemove( response.data ) )
+				dispatch( removeTodo( response.data ) )
 			} )
 			.catch( error => {
 				dispatch( initDataFailed( error ) )
@@ -81,12 +81,12 @@ export const handleRemove = id => {
 	}
 }
 
-const toggleRemove = result => ( {
-	type: TOGGLE_REMOVE,
+const removeTodo = result => ( {
+	type: REMOVE_TODO,
 	payload: { id: result.id },
 } )
 
-export const handleEdit = ( id, updatedTask ) => {
+export const handleEditTaskTodo = ( id, updatedTask ) => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
@@ -96,7 +96,7 @@ export const handleEdit = ( id, updatedTask ) => {
 				task: updatedTask,
 			} )
 			.then( response => {
-				dispatch( updateTask( response.data ) )
+				dispatch( editTaskTodo( response.data ) )
 			} )
 			.catch( error => {
 				dispatch( initDataFailed( error ) )
@@ -104,8 +104,8 @@ export const handleEdit = ( id, updatedTask ) => {
 	}
 }
 
-const updateTask = result => ( {
-	type: UPDATE_TASK,
+const editTaskTodo = result => ( {
+	type: EDIT_TASK_TODO,
 	payload: {
 		id: result.id,
 		task: result.task,
