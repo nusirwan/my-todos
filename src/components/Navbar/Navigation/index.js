@@ -20,9 +20,9 @@ const Navigation = props => {
 	return (
 		<Nav isVisible={ isVisible }>
 			<Select name="todos" onChange={ handleChange }>
-				<option value="all" defaultValue>All</option>
-				<option value="active">Active</option>
-				<option value="complete">Complete</option>
+				<option value="ALL" defaultValue>All</option>
+				<option value="ACTIVE">Active</option>
+				<option value="COMPLETED">Completed</option>
 			</Select>
 			<Divider />
 			<Add onClick={ onClick }><FiPlusSquare /></Add>
