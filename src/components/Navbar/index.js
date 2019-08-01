@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
-import { toggleButton } from '../../store/actions';
+import { handleAddTodo, toggleButton } from '../../store/actions';
 
 import {
 	Header,
@@ -14,12 +14,15 @@ import {
 
 const Navbar = props => {
 	const {
-		addTodo,
 		dispatch,
 		filterTodo,
 		formShow,
 		loading,
 	} = props;
+
+	const addTodo = task => {
+		dispatch( handleAddTodo( task ) )
+	}
 
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
