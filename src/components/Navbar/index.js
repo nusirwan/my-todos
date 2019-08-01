@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
-import { handleAddTodo, toggleButton } from '../../store/actions';
+import { handleAddTodo, toggleButton, setFilter } from '../../store/actions';
 
 import {
 	Header,
@@ -15,13 +15,16 @@ import {
 const Navbar = props => {
 	const {
 		dispatch,
-		filterTodo,
 		formShow,
 		loading,
 	} = props;
 
 	const addTodo = task => {
 		dispatch( handleAddTodo( task ) )
+	}
+
+	const filterTodo = value => {
+		dispatch( setFilter( value ) )
 	}
 
 	return (
