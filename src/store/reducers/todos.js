@@ -8,6 +8,7 @@ let initialState = {
 export const INITIAL_DATA_STARTED = 'INITIAL_DATA_STARTED';
 export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
 export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
+export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_BUTTON = 'TOGGLE_BUTTON';
 export const EDIT_COMPLETION_TODO = 'EDIT_COMPLETION_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
@@ -18,6 +19,7 @@ const items = ( state = initialState, action ) => {
 		case INITIAL_DATA_STARTED :
 			return {
 				...state,
+				formShow: false,
 				loading: true,
 			}
 
@@ -36,6 +38,16 @@ const items = ( state = initialState, action ) => {
 				...state,
 				loading: false,
 				error: true,
+			}
+
+		case ADD_TODO :
+			return {
+				...state,
+				loading: false,
+				todos: [
+					...state.todos,
+					action.payload.todos,
+				],
 			}
 
 		case EDIT_COMPLETION_TODO : {

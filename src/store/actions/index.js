@@ -4,6 +4,7 @@ import {
 	INITIAL_DATA_STARTED,
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
+	ADD_TODO,
 	TOGGLE_BUTTON,
 	EDIT_COMPLETION_TODO,
 	REMOVE_TODO,
@@ -37,6 +38,30 @@ const initDataRequest = todos => ( {
 
 const initDataFailed = () => ( {
 	type: INITIAL_DATA_FAILED,
+} )
+
+export const handleAddTodo = newTask => {
+	// redux thunk
+	return async dispatch => {
+		dispatch( initDataStarted() )
+
+		await axios
+			.post( '/mytodos', {
+				task: newTask,
+				completed: false,
+			} )
+			.then( response => {
+				dispatch( addTodo( response.data ) )
+			} )
+			.catch( error => {
+				dispatch( initDataFailed( error ) )
+			} )
+	}
+}
+
+const addTodo = todos => ( {
+	type: ADD_TODO,
+	payload: { todos },
 } )
 
 export const handleEditCompletionTodo = ( id, completed ) => {
