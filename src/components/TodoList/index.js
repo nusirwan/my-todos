@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
 	fetchTodos,
@@ -9,7 +9,7 @@ import {
 
 import Todo from '../Todo';
 
-import { Todos } from './styles';
+import { ErrorText, Todos } from './styles';
 
 class TodoList extends Component {
 	componentDidMount() {
@@ -35,28 +35,36 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const { todos } = this.props;
+		const { error, todos } = this.props;
 		const { remove, toggleCompletion, update } = this;
 
 		return (
-			<Todos>
-				{ todos.map( todo => (
-					<Todo
-						key={ todo.id }
-						id={ todo.id }
-						completed={ todo.completed }
-						task={ todo.task }
-						toggleCompletion={ toggleCompletion }
-						toggleRemove={ remove }
-						updateTodo={ update }
-					/>
-				) ) }
-			</Todos>
+			<Fragment>
+				{ error
+					? <ErrorText>Ops... Internal Server Error!</ErrorText>
+					: (
+						<Todos>
+							{ todos.map( todo => (
+								<Todo
+									key={ todo.id }
+									id={ todo.id }
+									completed={ todo.completed }
+									task={ todo.task }
+									toggleCompletion={ toggleCompletion }
+									toggleRemove={ remove }
+									updateTodo={ update }
+								/>
+							) ) }
+						</Todos>
+					)
+				}
+			</Fragment>
 		);
 	}
 }
 
 const mapStateToProps = state => ( {
+	error: state.error,
 	todos: state.todos,
 } );
 
