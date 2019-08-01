@@ -9,6 +9,7 @@ import {
 	EDIT_COMPLETION_TODO,
 	REMOVE_TODO,
 	EDIT_TASK_TODO,
+	SET_FILTER,
 } from '../reducers/todos';
 
 export const fetchTodos = () => {
@@ -140,4 +141,9 @@ const editTaskTodo = result => ( {
 // TODO: split into ui action
 export const toggleButton = () => ( {
 	type: TOGGLE_BUTTON,
+} )
+
+export const setFilter = filter => ( {
+	type: SET_FILTER,
+	payload: { filter },
 } )
