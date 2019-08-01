@@ -12,10 +12,10 @@ import {
 
 export const fetchTodos = () => {
 	// redux thunk
-	return dispatch => {
+	return async dispatch => {
 		dispatch( initDataStarted() )
 
-		axios
+		await axios
 			.get( '/mytodos' )
 			.then( response => {
 				dispatch( initData( response.data ) )
@@ -41,76 +41,74 @@ const initDataFailed = () => ( {
 
 export const editCompletion = ( id, completed ) => {
 	// redux thunk
-	return dispatch => {
+	return async dispatch => {
 		dispatch( initDataStarted() )
 
-		axios
-			.put( `/mytodos/${ id }`, { completed: ! completed } )
+		await axios
+			.put( `/mytodos/${ id }`, {
+				completed: ! completed,
+			} )
 			.then( response => {
-				const { id, completed } = response.data;
-				dispatch( toggleCompletion( id, completed ) )
+				dispatch( toggleCompletion( response.data ) )
 			} )
 			.catch( error => {
-				// eslint-disable-next-line no-console
-				console.log( error );
+				dispatch( initDataFailed( error ) )
 			} )
 	}
 }
 
-const toggleCompletion = ( id, completed ) => ( {
+const toggleCompletion = result => ( {
 	type: TOGGLE_COMPLETION,
 	payload: {
-		id,
-		completed,
+		id: result.id,
+		completed: result.completed,
 	},
 } )
 
 export const handleRemove = id => {
 	// redux thunk
-	return dispatch => {
+	return async dispatch => {
 		dispatch( initDataStarted() )
 
-		axios
+		await axios
 			.delete( `/mytodos/${ id }` )
 			.then( response => {
-				const { id } = response.data;
-				dispatch( toggleRemove( id ) )
+				dispatch( toggleRemove( response.data ) )
 			} )
 			.catch( error => {
-				// eslint-disable-next-line no-console
-				console.log( error );
+				dispatch( initDataFailed( error ) )
 			} )
 	}
 }
 
-const toggleRemove = id => ( {
+const toggleRemove = result => ( {
 	type: TOGGLE_REMOVE,
-	payload: { id },
+	payload: { id: result.id },
 } )
 
 export const handleEdit = ( id, updatedTask ) => {
 	// redux thunk
-	return dispatch => {
+	return async dispatch => {
 		dispatch( initDataStarted() )
 
-		axios
-			.put( `/mytodos/${ id }`, { task: updatedTask } )
+		await axios
+			.put( `/mytodos/${ id }`, {
+				task: updatedTask,
+			} )
 			.then( response => {
-				const { id, task } = response.data;
-				dispatch( updateTask( id, task ) )
+				dispatch( updateTask( response.data ) )
 			} )
 			.catch( error => {
-				// eslint-disable-next-line no-console
-				console.log( error );
+				dispatch( initDataFailed( error ) )
 			} )
 	}
 }
 
-const updateTask = ( id, task ) => ( {
+const updateTask = result => ( {
 	type: UPDATE_TASK,
 	payload: {
-		id,
-		task,
+		id: result.id,
+		task: result.task,
 	},
 } )
 
