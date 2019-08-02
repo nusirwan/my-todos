@@ -6,26 +6,16 @@ import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
 import { handleAddTodo, toggleButton, setFilter } from '../../store/actions';
 
-import {
-	Header,
-	Title,
-	Wrapper,
-} from './styles';
+import { Header, Title, Wrapper } from './styles';
 
 const Navbar = props => {
 	const {
-		dispatch,
 		formShow,
+		handleAddTodo,
 		loading,
+		setFilter,
+		toggleButton,
 	} = props;
-
-	const addTodo = task => {
-		dispatch( handleAddTodo( task ) )
-	}
-
-	const filterTodo = value => {
-		dispatch( setFilter( value ) )
-	}
 
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
@@ -38,18 +28,27 @@ const Navbar = props => {
 				/>
 				<Navigation
 					isVisible={ ! loading }
-					filterTodo={ filterTodo }
-					onClick={ () => dispatch( toggleButton() ) }
+					filterTodo={ setFilter }
+					onClick={ toggleButton }
 				/>
 			</Wrapper>
-			<NewTodoForm addTodo={ addTodo } isVisible={ formShow } />
+			<NewTodoForm addTodo={ handleAddTodo } isVisible={ formShow } />
 		</Header>
 	)
 }
+
+const mapDispatchToProps = dispatch => ( {
+	handleAddTodo: task => dispatch( handleAddTodo( task ) ),
+	setFilter: value => dispatch( setFilter( value ) ),
+	toggleButton: () => dispatch( toggleButton() ),
+} );
 
 const mapStateToProps = state => ( {
 	formShow: state.formShow,
 	loading: state.loading,
 } );
 
-export default connect( mapStateToProps )( Navbar );
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( Navbar );
