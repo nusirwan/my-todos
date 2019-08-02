@@ -3,10 +3,9 @@ import posed from 'react-pose';
 
 import theme from '../../base-styles/theme';
 import { button, fadeInDown } from '../../base-styles/transitions';
+import { TOGGLEWRAP_WIDTH } from './Toggles/styles';
 
 const { colors } = theme;
-
-const TOGGLEWRAP_WIDTH = '6.25rem';
 
 export const List = styled( posed.li( fadeInDown ) )`
 	display: flex;
