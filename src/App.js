@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 
 import GlobalStyle from './base-styles/globalStyle';
 import Container from './components/Container';
-import Navbar from './components/Navbar';
+import Navbar from './containers/Navbar';
 import TodoList from './components/TodoList';
 
 class App extends Component {
