@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux';
 
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
-import { handleAddTodo, toggleButton, setFilter } from '../../store/actions';
 
 import { Header, Title, Wrapper } from './styles';
 
@@ -37,18 +35,4 @@ const Navbar = props => {
 	)
 }
 
-const mapDispatchToProps = dispatch => ( {
-	handleAddTodo: task => dispatch( handleAddTodo( task ) ),
-	setFilter: value => dispatch( setFilter( value ) ),
-	toggleButton: () => dispatch( toggleButton() ),
-} );
-
-const mapStateToProps = state => ( {
-	formShow: state.formShow,
-	loading: state.loading,
-} );
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)( Navbar );
+export default Navbar;
