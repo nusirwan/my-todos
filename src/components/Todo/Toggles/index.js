@@ -6,8 +6,7 @@ import { Check, Remove, Wrapper } from './styles';
 
 const Toggles = props => {
 	const {
-		completed,
-		isVisible,
+		isCheked,
 		toggleCompletion,
 		toggleRemove,
 		toggleWrapRef,
@@ -15,11 +14,7 @@ const Toggles = props => {
 
 	return (
 		<Wrapper ref={ toggleWrapRef }>
-			<Check
-				completed={ completed }
-				isVisible={ isVisible }
-				onClick={ toggleCompletion }
-			>
+			<Check isCheked={ isCheked } onClick={ toggleCompletion } >
 				<FiCheckSquare />
 				<FiSquare />
 			</Check>
@@ -29,8 +24,7 @@ const Toggles = props => {
 }
 
 Toggles.propTypes = {
-	completed: PropTypes.bool.isRequired,
-	isVisible: PropTypes.bool.isRequired,
+	isCheked: PropTypes.bool.isRequired,
 	toggleRemove: PropTypes.func.isRequired,
 	toggleCompletion: PropTypes.func.isRequired,
 	toggleWrapRef: PropTypes.object.isRequired,

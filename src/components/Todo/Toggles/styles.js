@@ -56,7 +56,7 @@ export const Check = styled( BaseButton )`
 		color: ${ colors.turquoiseBlue };
 
 		&:first-child {
-			visibility: ${ props => props.isVisible ? 'visible' : 'hidden' };
+			visibility: ${ props => props.isCheked ? 'visible' : 'hidden' };
 		}
 	}
 `;

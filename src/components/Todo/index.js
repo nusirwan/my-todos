@@ -88,8 +88,7 @@ const Todo = props => {
 			</TaskWrap>
 			<Toggles
 				toggleWrapRef={ toggleWrapRef }
-				completed={ completed }
-				isVisible={ completed }
+				isCheked={ completed }
 				toggleCompletion={ handleCompletion }
 				toggleRemove={ () => toggleRemove( id ) }
 			/>
