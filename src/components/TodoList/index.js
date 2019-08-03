@@ -1,11 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import {
-	fetchTodos,
-	handleEditCompletionTodo,
-	handleRemoveTodo,
-	handleEditTaskTodo,
-} from '../../store/actions';
 
 import Todo from '../Todo';
 
@@ -56,37 +49,4 @@ class TodoList extends Component {
 		);
 	}
 }
-
-const getTodos = ( todos, filter ) => {
-	switch ( filter ) {
-		case 'ALL':
-			return todos;
-		case 'ACTIVE':
-			return todos.filter( todo => ! todo.completed );
-		case 'COMPLETED':
-			return todos.filter( todo => todo.completed );
-		default:
-			return todos;
-	}
-}
-
-const mapDispatchToProps = dispatch => ( {
-	fetchTodos: () => dispatch( fetchTodos() ),
-	handleEditCompletionTodo: ( id, completed ) => dispatch(
-		handleEditCompletionTodo( id, completed )
-	),
-	handleRemoveTodo: id => dispatch( handleRemoveTodo( id ) ),
-	handleEditTaskTodo: ( id, updateTask ) => dispatch(
-		handleEditTaskTodo( id, updateTask )
-	),
-} );
-
-const mapStateToProps = state => ( {
-	error: state.error,
-	todos: getTodos( state.todos, state.filterTodos ),
-} );
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)( TodoList );
+export default TodoList;
