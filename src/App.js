@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader';
 import GlobalStyle from './base-styles/globalStyle';
 import Container from './components/Container';
 import Navbar from './containers/Navbar';
-import TodoList from './components/TodoList';
+import TodoList from './containers/TodoList';
 
 class App extends Component {
 	render() {
