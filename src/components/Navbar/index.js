@@ -1,57 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 
 import Loader from '../Loader';
 import NewTodoForm from './NewTodoForm';
 import Navigation from './Navigation';
 
-import {
-	Header,
-	Title,
-	Wrapper,
-} from './styles';
+import { Header, Title, Wrapper } from './styles';
 
 const Navbar = props => {
 	const {
-		addTodo,
-		filterTodo,
 		formShow,
-		headerTitle,
+		handleAddTodo,
 		loading,
-		loaderText,
-		loaderType,
-		toggleFormShow,
+		setFilter,
+		toggleButton,
 	} = props;
 
 	return (
 		<Header pose={ formShow ? 'open' : 'closed' }>
 			<Wrapper>
-				<Title initialPose="exit" pose="enter">{ headerTitle }</Title>
+				<Title initialPose="exit" pose="enter">my_Todos</Title>
 				<Loader
 					isVisible={ loading }
-					title={ loaderText }
-					type={ loaderType }
+					title="Loading..."
+					type="Ball-Triangle"
 				/>
 				<Navigation
 					isVisible={ ! loading }
-					filterTodo={ filterTodo }
-					onClick={ toggleFormShow }
+					filterTodo={ setFilter }
+					onClick={ toggleButton }
 				/>
 			</Wrapper>
-			<NewTodoForm addTodo={ addTodo } isVisible={ formShow } />
+			<NewTodoForm addTodo={ handleAddTodo } isVisible={ formShow } />
 		</Header>
 	)
-}
-
-Navbar.propTypes = {
-	addTodo: PropTypes.func.isRequired,
-	filterTodo: PropTypes.func.isRequired,
-	formShow: PropTypes.bool.isRequired,
-	headerTitle: PropTypes.string.isRequired,
-	loading: PropTypes.bool.isRequired,
-	loaderText: PropTypes.string,
-	loaderType: PropTypes.string,
-	toggleFormShow: PropTypes.func.isRequired,
 }
 
 export default Navbar;

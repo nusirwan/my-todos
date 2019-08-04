@@ -1,189 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
-import axios from '../../axios'
-import Navbar from '../Navbar';
 import Todo from '../Todo';
 
-import {
-	ErrorText,
-	Todos,
-	Wraper,
-} from './styles';
+import { ErrorText, Todos } from './styles';
 
 class TodoList extends Component {
-	state = {
-		error: false,
-		formShow: false,
-		loading: true,
-		todos: [],
-		todoToShow: 'all',
-	};
-
-	async componentDidMount() {
-		await axios.get( '/mytodos' )
-			.then( response => {
-				setTimeout( () => {
-					this.setState( {
-						todos: response.data,
-						loading: false,
-					} )
-				}, 1000 );
-			} )
-			.catch( () => {
-				setTimeout( () => {
-					this.setState( {
-						loading: false,
-						error: true,
-					} )
-				}, 1000 );
-			} )
+	componentDidMount() {
+		this.props.fetchTodos();
 	}
 
-	add = async newTodos => {
-		this.setState( { loading: true } )
-		await axios.post( '/mytodos', newTodos )
-			.then( response => {
-				this.setState( {
-					todos: [
-						...this.state.todos,
-						response.data,
-					],
-					loading: false,
-				} )
-			} )
-			.catch( () => {
-				this.setState( {
-					error: true,
-					loading: false,
-				} )
-			} )
+	update = ( id, updateTask ) => {
+		this.props.handleEditTaskTodo( id, updateTask );
 	}
 
-	remove = async id => {
-		this.setState( { loading: true } )
-		await axios.delete( `/mytodos/${ id }` )
-			.then( () => {
-				const todos = this.state.todos;
-				const updatedTodos = todos.filter( todo => todo.id !== id );
-				this.setState( {
-					todos: updatedTodos,
-					loading: false,
-				} )
-			} )
-			.catch( () => {
-				this.setState( {
-					error: true,
-					loading: false,
-				} )
-			} )
+	remove = id => {
+		this.props.handleRemoveTodo( id );
 	}
 
-	update = async ( id, updatedTask ) => {
-		this.setState( { loading: true } )
-		await axios.put( `/mytodos/${ id }`, { task: updatedTask } )
-			.then( response => {
-				const updatedTodos = this.state.todos.map( todo => {
-					if ( todo.id === id ) {
-						return {
-							...todo,
-							task: response.data.task,
-						}
-					}
-					return todo;
-				} );
-				this.setState( {
-					todos: updatedTodos,
-					loading: false,
-				} );
-			} )
-			.catch( () => {
-				this.setState( {
-					error: true,
-					loading: false,
-				} )
-			} )
-	}
-
-	toggleCompletion = async ( id, completed ) => {
-		this.setState( { loading: true } )
-		await axios.put( `/mytodos/${ id }`, { completed: ! completed } )
-			.then( response => {
-				const updatedTodos = this.state.todos.map( todo => {
-					if ( todo.id === id ) {
-						return {
-							...todo,
-							completed: response.data.completed,
-						}
-					}
-					return todo
-				} );
-				this.setState( {
-					todos: updatedTodos,
-					loading: false,
-				} );
-			} )
-			.catch( () => {
-				this.setState( {
-					error: true,
-					loading: false,
-				} )
-			} )
-	}
-
-	filterTodoToShow = filter => {
-		this.setState( {
-			todoToShow: filter,
-		} )
-	}
-
-	toggleFormShow = () => {
-		this.setState( prevState => ( {
-			formShow: ! prevState.formShow,
-		} ) )
+	toggleCompletion = ( id, completed ) => {
+		this.props.handleEditCompletionTodo( id, completed )
 	}
 
 	render() {
-		const {
-			add,
-			remove,
-			state: {
-				error,
-				formShow,
-				loading,
-				todoToShow,
-			},
-			toggleCompletion,
-			toggleFormShow,
-			filterTodoToShow,
-			update,
-		} = this;
-
-		let todos = [];
-		// eslint-disable-next-line default-case
-		switch ( todoToShow ) {
-			case 'all':
-				todos = this.state.todos;
-				break;
-			case 'active':
-				todos = this.state.todos.filter( todo => ! todo.completed );
-				break;
-			case 'complete':
-				todos = this.state.todos.filter( todo => todo.completed );
-				break;
-		}
+		const { error, todos } = this.props;
+		const { remove, toggleCompletion, update } = this;
 
 		return (
-			<Wraper>
-				<Navbar
-					addTodo={ add }
-					filterTodo={ filterTodoToShow }
-					formShow={ formShow }
-					headerTitle="my Todos"
-					loading={ loading }
-					loaderText="Loading..."
-					loaderType="Ball-Triangle"
-					toggleFormShow={ toggleFormShow }
-				/>
+			<Fragment>
 				{ error
 					? <ErrorText>Ops... Internal Server Error!</ErrorText>
 					: (
@@ -202,9 +45,8 @@ class TodoList extends Component {
 						</Todos>
 					)
 				}
-			</Wraper>
+			</Fragment>
 		);
 	}
 }
-
 export default TodoList;

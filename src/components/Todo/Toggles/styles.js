@@ -6,7 +6,7 @@ import { button } from '../../../base-styles/transitions';
 
 const { colors } = theme;
 
-const TOGGLEWRAP_WIDTH = '6.25rem';
+export const TOGGLEWRAP_WIDTH = '6.25rem';
 
 const BaseButton = styled( posed.button( button ) )`
 	display: flex;
@@ -56,7 +56,7 @@ export const Check = styled( BaseButton )`
 		color: ${ colors.turquoiseBlue };
 
 		&:first-child {
-			visibility: ${ props => props.isVisible ? 'visible' : 'hidden' };
+			visibility: ${ props => props.isCheked ? 'visible' : 'hidden' };
 		}
 	}
 `;

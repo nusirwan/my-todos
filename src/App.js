@@ -3,7 +3,8 @@ import { hot } from 'react-hot-loader';
 
 import GlobalStyle from './base-styles/globalStyle';
 import Container from './components/Container';
-import TodoList from './components/TodoList';
+import Navbar from './containers/Navbar';
+import TodoList from './containers/TodoList';
 
 class App extends Component {
 	render() {
@@ -11,6 +12,7 @@ class App extends Component {
 			<Fragment>
 				<GlobalStyle />
 				<Container>
+					<Navbar />
 					<TodoList />
 				</Container>
 			</Fragment>

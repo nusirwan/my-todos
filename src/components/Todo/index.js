@@ -18,7 +18,7 @@ const Todo = props => {
 	const [ task, setTask ] = useState( props.task );
 	const [ completed, setCompleted ] = useState( props.completed );
 	const [ editing, setEditing ] = useState( false );
-	const [ visible, setVisible ] = useState( false );
+	const [ isTogglesOpen, setTogglesOpen ] = useState( false );
 	const toggleWrapRef = useRef();
 	const {
 		id,
@@ -49,14 +49,14 @@ const Todo = props => {
 	};
 
 	useOutsideClick( toggleWrapRef, () => {
-		if ( visible ) {
-			setVisible( false )
+		if ( isTogglesOpen ) {
+			setTogglesOpen( false )
 		}
 	} )
 
 	return (
 		<List initialPose="exit" pose="enter">
-			<TaskWrap pose={ visible ? 'open' : 'closed' }>
+			<TaskWrap pose={ isTogglesOpen ? 'open' : 'closed' }>
 				{ editing
 					? (
 						<Form onSubmit={ handleUpdate }>
@@ -82,14 +82,13 @@ const Todo = props => {
 						</Task>
 					)
 				}
-				<More onClick={ () => setVisible( ! visible ) }>
+				<More onClick={ () => setTogglesOpen( ! isTogglesOpen ) }>
 					<FiMoreVertical />
 				</More>
 			</TaskWrap>
 			<Toggles
 				toggleWrapRef={ toggleWrapRef }
-				completed={ completed }
-				isVisible={ completed }
+				isCheked={ completed }
 				toggleCompletion={ handleCompletion }
 				toggleRemove={ () => toggleRemove( id ) }
 			/>
