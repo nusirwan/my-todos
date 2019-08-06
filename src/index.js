@@ -7,8 +7,10 @@ import logger from 'redux-logger';
 import { BrowserRouter, withRouter } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
-import reducer from './store/reducers/todos';
+import reducer from './store/reducers';
 import App from './App';
+
+// console.log( reducer )
 
 const store = createStore( reducer, applyMiddleware( thunk, logger ) );
 const Main = withRouter( props => <App { ...props } /> );

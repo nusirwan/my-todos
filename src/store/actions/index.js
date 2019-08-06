@@ -6,12 +6,15 @@ import {
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
 	ADD_TODO,
-	TOGGLE_BUTTON,
 	EDIT_COMPLETION_TODO,
 	REMOVE_TODO,
 	EDIT_TASK_TODO,
+} from '../reducers/services';
+
+import {
+	TOGGLE_BUTTON,
 	SET_FILTER,
-} from '../reducers/todos';
+} from '../reducers/ui';
 
 export const fetchTodos = () => {
 	// redux thunk

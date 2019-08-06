@@ -33,8 +33,11 @@ const mapDispatchToProps = dispatch => ( {
 } );
 
 const mapStateToProps = state => ( {
-	error: state.error,
-	todos: getTodos( state.todos, state.filterTodos ),
+	error: state.services.error,
+	todos: getTodos(
+		state.services.todos,
+		state.ui.filterTodos,
+	),
 } );
 
 export default connect(

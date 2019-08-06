@@ -10,8 +10,8 @@ const mapDispatchToProps = dispatch => ( {
 } );
 
 const mapStateToProps = state => ( {
-	formShow: state.formShow,
-	loading: state.loading,
+	formShow: state.ui.formShow,
+	loading: state.services.loading,
 } );
 
 export default connect(
