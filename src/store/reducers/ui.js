@@ -1,3 +1,5 @@
+import { INITIAL_DATA_STARTED } from './services'
+
 let initialState = {
 	filterTodos: 'ALL',
 	formShow: false,
@@ -8,6 +10,12 @@ export const SET_FILTER = 'SET_FILTER';
 
 const ui = ( state = initialState, action ) => {
 	switch ( action.type ) {
+		case INITIAL_DATA_STARTED:
+			return {
+				...state,
+				formShow: false,
+			}
+
 		case TOGGLE_BUTTON:
 			return {
 				...state,

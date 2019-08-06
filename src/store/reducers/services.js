@@ -17,7 +17,6 @@ const services = ( state = initialState, action ) => {
 		case INITIAL_DATA_STARTED :
 			return {
 				...state,
-				formShow: false,
 				loading: true,
 			}
 
