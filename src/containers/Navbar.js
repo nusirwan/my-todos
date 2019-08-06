@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
-import { handleAddTodo, toggleButton, setFilter } from '../store/actions';
+import { handleAddTodo } from '../store/actions/services';
+import { toggleButton, setFilter } from '../store/actions/ui';
 
 const mapDispatchToProps = dispatch => ( {
 	handleAddTodo: task => dispatch( handleAddTodo( task ) ),
@@ -10,8 +11,8 @@ const mapDispatchToProps = dispatch => ( {
 } );
 
 const mapStateToProps = state => ( {
-	formShow: state.formShow,
-	loading: state.loading,
+	formShow: state.ui.formShow,
+	loading: state.services.loading,
 } );
 
 export default connect(

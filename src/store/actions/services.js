@@ -1,24 +1,24 @@
-import axios from '../../axios'
+import axios from 'axios';
+import { baseUrl } from '../../config/config'
 
 import {
 	INITIAL_DATA_STARTED,
 	INITIAL_DATA_REQUEST,
 	INITIAL_DATA_FAILED,
 	ADD_TODO,
-	TOGGLE_BUTTON,
 	EDIT_COMPLETION_TODO,
 	REMOVE_TODO,
 	EDIT_TASK_TODO,
-	SET_FILTER,
-} from '../reducers/todos';
+} from '../reducers/services';
 
 export const fetchTodos = () => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
+		let apiEndpoint = baseUrl + '/mytodos';
 
 		await axios
-			.get( '/mytodos' )
+			.get( apiEndpoint )
 			.then( response => {
 				dispatch( initDataRequest( response.data ) )
 			} )
@@ -45,9 +45,10 @@ export const handleAddTodo = newTask => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
+		let apiEndpoint = baseUrl + '/mytodos';
 
 		await axios
-			.post( '/mytodos', {
+			.post( apiEndpoint, {
 				task: newTask,
 				completed: false,
 			} )
@@ -69,9 +70,10 @@ export const handleEditCompletionTodo = ( id, completed ) => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
+		let apiEndpoint = baseUrl + `/mytodos/${ id }`;
 
 		await axios
-			.put( `/mytodos/${ id }`, {
+			.put( apiEndpoint, {
 				completed: ! completed,
 			} )
 			.then( response => {
@@ -95,9 +97,10 @@ export const handleRemoveTodo = id => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
+		let apiEndpoint = baseUrl + `/mytodos/${ id }`;
 
 		await axios
-			.delete( `/mytodos/${ id }` )
+			.delete( apiEndpoint )
 			.then( response => {
 				dispatch( removeTodo( response.data ) )
 			} )
@@ -116,9 +119,10 @@ export const handleEditTaskTodo = ( id, updatedTask ) => {
 	// redux thunk
 	return async dispatch => {
 		dispatch( initDataStarted() )
+		let apiEndpoint = baseUrl + `/mytodos/${ id }`;
 
 		await axios
-			.put( `/mytodos/${ id }`, {
+			.put( apiEndpoint, {
 				task: updatedTask,
 			} )
 			.then( response => {
@@ -136,14 +140,4 @@ const editTaskTodo = result => ( {
 		id: result.id,
 		task: result.task,
 	},
-} )
-
-// TODO: split into ui action
-export const toggleButton = () => ( {
-	type: TOGGLE_BUTTON,
-} )
-
-export const setFilter = filter => ( {
-	type: SET_FILTER,
-	payload: { filter },
 } )

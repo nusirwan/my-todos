@@ -6,7 +6,7 @@ import {
 	handleEditCompletionTodo,
 	handleRemoveTodo,
 	handleEditTaskTodo,
-} from '../store/actions';
+} from '../store/actions/services';
 
 const getTodos = ( todos, filter ) => {
 	switch ( filter ) {
@@ -33,8 +33,11 @@ const mapDispatchToProps = dispatch => ( {
 } );
 
 const mapStateToProps = state => ( {
-	error: state.error,
-	todos: getTodos( state.todos, state.filterTodos ),
+	error: state.services.error,
+	todos: getTodos(
+		state.services.todos,
+		state.ui.filterTodos,
+	),
 } );
 
 export default connect(

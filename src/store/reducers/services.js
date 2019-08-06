@@ -1,7 +1,5 @@
 let initialState = {
 	error: false,
-	filterTodos: 'ALL',
-	formShow: false,
 	loading: true,
 	todos: [],
 };
@@ -10,18 +8,15 @@ export const INITIAL_DATA_STARTED = 'INITIAL_DATA_STARTED';
 export const INITIAL_DATA_REQUEST = 'INITIAL_DATA_REQUEST';
 export const INITIAL_DATA_FAILED = 'INITIAL_DATA_FAILED';
 export const ADD_TODO = 'ADD_TODO';
-export const TOGGLE_BUTTON = 'TOGGLE_BUTTON';
 export const EDIT_COMPLETION_TODO = 'EDIT_COMPLETION_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const EDIT_TASK_TODO = 'EDIT_TASK_TODO';
-export const SET_FILTER = 'SET_FILTER';
 
-const items = ( state = initialState, action ) => {
+const services = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case INITIAL_DATA_STARTED :
 			return {
 				...state,
-				formShow: false,
 				loading: true,
 			}
 
@@ -101,22 +96,9 @@ const items = ( state = initialState, action ) => {
 			}
 		}
 
-		// TODO: split into ui reducer
-		case TOGGLE_BUTTON:
-			return {
-				...state,
-				formShow: ! state.formShow,
-			}
-
-		case SET_FILTER:
-			return {
-				...state,
-				filterTodos: action.payload.filter,
-			}
-
 		default:
 			return state;
 	}
 }
 
-export default items;
+export default services;
