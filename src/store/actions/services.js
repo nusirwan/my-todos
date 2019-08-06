@@ -11,11 +11,6 @@ import {
 	EDIT_TASK_TODO,
 } from '../reducers/services';
 
-import {
-	TOGGLE_BUTTON,
-	SET_FILTER,
-} from '../reducers/ui';
-
 export const fetchTodos = () => {
 	// redux thunk
 	return async dispatch => {
@@ -145,14 +140,4 @@ const editTaskTodo = result => ( {
 		id: result.id,
 		task: result.task,
 	},
-} )
-
-// TODO: split into ui action
-export const toggleButton = () => ( {
-	type: TOGGLE_BUTTON,
-} )
-
-export const setFilter = filter => ( {
-	type: SET_FILTER,
-	payload: { filter },
 } )

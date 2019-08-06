@@ -6,7 +6,7 @@ import {
 	handleEditCompletionTodo,
 	handleRemoveTodo,
 	handleEditTaskTodo,
-} from '../store/actions';
+} from '../store/actions/services';
 
 const getTodos = ( todos, filter ) => {
 	switch ( filter ) {
